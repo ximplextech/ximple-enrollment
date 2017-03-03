@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
 /*****************************************************************************************
  * EduSec  Open Source Edition is a School / College management system developed by
  * RUDRA SOFTECH. Copyright (C) 2010-2015 RUDRA SOFTECH.
@@ -37,8 +39,8 @@ if(!file_exists(__DIR__.'/config/db.php')) {
 }
 
 // comment out the following two lines when deployed to production
-defined('YII_DEBUG') or define('YII_DEBUG', false);
-defined('YII_ENV') or define('YII_ENV', 'prod');
+defined('YII_DEBUG') or define('YII_DEBUG', true);
+defined('YII_ENV') or define('YII_ENV', 'dev');
 
 require(__DIR__ . '/vendor/autoload.php');
 require(__DIR__ . '/vendor/yiisoft/yii2/Yii.php');

@@ -22,7 +22,7 @@ use yii\helpers\Html;
         <div class="pull-right hidden-xs">
           <!--b>Version</b> 3.0 -->
         </div>
-        <strong><?= Yii::t('app', 'Copyright') ?> &copy; <?= date('Y') ?> <a href="http://www.rudrasoftech.com">Rudra Softech</a>.</strong> <?= Yii::t('app', 'All rights reserved') ?>.
+        <strong><?= Yii::t('app', 'Copyright') ?> &copy; <?= date('Y') ?> <a href="http://ximplexsoft.com">XimpleX Software</a>.</strong> <?= Yii::t('app', 'All rights reserved') ?>.
       </div>
     </footer>
 

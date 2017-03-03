@@ -26,7 +26,7 @@ endif;
 
 <header class="main-header header<?php // (Yii::$app->language == 'ar' ? 'main-header' : 'header')?>">
 
-<?= Html::a(Html::img(Yii::$app->request->baseUrl.'/images/edusec.png', ['width'=>'120px;', 'height'=>'22px']), Yii::$app->homeUrl, ['class' => 'logo', /*'style' => ((\Yii::$app->language == 'ar') ? 'padding: 14px 50px !important;' : '')*/]) ?>
+<?= Html::a(Html::img(Yii::$app->request->baseUrl.'/images/logo.png', ['width'=>'120px;', 'height'=>'22px']), Yii::$app->homeUrl, ['class' => 'logo', /*'style' => ((\Yii::$app->language == 'ar') ? 'padding: 14px 50px !important;' : '')*/]) ?>
 
 <nav class="navbar navbar-static-top" role="navigation">
 
