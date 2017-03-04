@@ -1,14 +1,14 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-$this->title = Yii::t('app', 'EduSec | Login');
+$this->title = Yii::t('app', 'Ximple Enrollment | Login');
 ?>
 <div class="login-box">
       <div class="login-logo">
 		&nbsp;
       </div><!-- /.login-logo -->
       <div class="login-box-body login-header">
-		<h1><?= Html::img(Yii::$app->request->baseUrl.'/images/product.png', ['width'=>'150px;']) ?></h1>
+		<h1><?= Html::img(Yii::$app->request->baseUrl.'/images/logo.png', ['width'=>'150px;']) ?></h1>
       </div>
       <div class="login-box-body">
   	

@@ -50,7 +50,7 @@ $requiredData = $resultsData['requirements'];
 <head>
     <meta charset="utf-8"/>
     <title>EduSec Application Requirement Checker</title>
-    <link rel="shortcut icon" href="images/rudrasoftech_favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="images/icon.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="vendor/bower/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>

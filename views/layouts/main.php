@@ -35,7 +35,7 @@ if (Yii::$app->controller->action->id === 'login') {
 		<meta property="og:description" content="Core functions like admissions, library management, transport management, students attendance in short entire range of university functions can be well performed by EduSec" />
 		<meta property="og:image" content="http://www.rudrasoftech.com/rudra.png">-->
 
-		<link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/images/logo.png" type="image/x-icon" />
+		<link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/images/icon.png" type="image/x-icon" />
 		<!-- Render this(ar-layout-css) file for supporting Arabic Language -->
 		<?= $this->render('ar-layout-css'); ?>
 
