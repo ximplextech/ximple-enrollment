@@ -8,7 +8,7 @@ use yii\grid\GridView;
 <div class="row">
   <div class="col-xs-12">
 	<h4 class="edusec-border-bottom-warning page-header edusec-profile-title-1">	
-		<i class="fa fa-inr"></i> <?php echo Yii::t('stu', 'Current Fees Details'); ?>
+		<i class="fa <?=\Yii::$app->params['currencyIcon']?>"></i> <?php echo Yii::t('stu', 'Current Fees Details'); ?>
 	</h4>
   </div><!-- /.col -->
 </div>
@@ -91,7 +91,7 @@ echo GridView::widget([
 <div class="row">
   <div class="col-xs-12">
 	<h4 class="edusec-border-bottom-warning page-header edusec-profile-title-1">	
-		<i class="fa fa-inr"></i> <?php echo Yii::t('stu', 'Student Payment History'); ?>
+		<i class="fa <?=\Yii::$app->params['currencyIcon']?>"></i> <?php echo Yii::t('stu', 'Student Payment History'); ?>
 	</h4>
   </div><!-- /.col -->
 </div>

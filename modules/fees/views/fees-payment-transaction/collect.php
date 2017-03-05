@@ -83,7 +83,7 @@ if($dispStatus) :
 <!---Start display fees collection details--->
 <div class="box-primary box view-item col-xs-12 col-lg-12 no-padding">
    <div class="box-header with-border">
-		<h3 class="box-title"><i class="fa fa-inr"></i> <?php echo Yii::t('fees', 'Fees Collection Details'); ?></h3>
+		<h3 class="box-title"><i class="fa <?=\Yii::$app->params['currencyIcon']?>"></i> <?php echo Yii::t('fees', 'Fees Collection Details'); ?></h3>
    </div>
    <div class="box-body table-responsive no-padding">
    <?php

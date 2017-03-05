@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
 <!--div class="table-responsive"-->
 <!-----Start Display Block Of Student Details----->
 <div class="col-xs-12">
-  <div class="col-lg-12 col-sm-12 col-xs-12 no-padding"><h3 class="box-title"><i class="fa fa-inr"></i> <?= $this->title ?></h3></div>
+  <div class="col-lg-12 col-sm-12 col-xs-12 no-padding"><h3 class="box-title"><i class="fa <?=\Yii::$app->params['currencyIcon']?>"></i> <?= $this->title ?></h3></div>
 </div>
 
 <div class="col-xs-12" style="padding-top: 10px;">
@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
 
 <div class="col-xs-12" style="padding-top: 10px;">
    <div class="box box-info col-xs-12 col-lg-12 no-padding">
-    <div class="box-header with-border"><h4 class="box-title"><i class="fa fa-inr"> </i> <?php echo Yii::t('fees', 'Current Fees Details'); ?></h4></div>
+    <div class="box-header with-border"><h4 class="box-title"><i class="fa <?=\Yii::$app->params['currencyIcon']?>"> </i> <?php echo Yii::t('fees', 'Current Fees Details'); ?></h4></div>
     <div class="box-body table-responsive">
 <?php 
 $currFeesData = new ActiveDataProvider([
@@ -140,7 +140,7 @@ echo GridView::widget([
 <div class="col-xs-12" style="padding-top: 10px;">
     <div class="box box-info col-xs-12 col-lg-12 no-padding">
      <div class="box-header with-border">
-	<h3 class="box-title"><i class="fa fa-inr"></i><sup><i class="fa fa-clock-o"></i></sup> <?php echo Yii::t('fees', 'Student Payment History'); ?></h3>
+	<h3 class="box-title"><i class="fa <?=\Yii::$app->params['currencyIcon']?>"></i><sup><i class="fa fa-clock-o"></i></sup> <?php echo Yii::t('fees', 'Student Payment History'); ?></h3>
      </div>
      <div class="box-body table-responsive">
 <?php

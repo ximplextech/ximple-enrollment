@@ -140,34 +140,34 @@ $stuInfo = app\modules\student\models\StuInfo::findOne($stuMaster->stu_master_st
 	    <div class="col-sm-3 col-xs-12">
 		<div class="box box-warning">
 		   <div class="box-header with-border">
-			<h3 class="box-title <?= (Yii::$app->language == 'ar') ? 'pull-right' : '' ?>"><i class="fa fa-inr"></i> <?php echo Yii::t('app', 'Fees Details') ?></h3>
+			<h3 class="box-title <?= (Yii::$app->language == 'ar') ? 'pull-right' : '' ?>"><i class="fa <?=\Yii::$app->params['currencyIcon']?>"></i> <?php echo Yii::t('app', 'Fees Details') ?></h3>
 		   </div>
 		   <div class="box-body">
 			<div class="small-box bg-aqua">
 			   <div class="inner">
-				<h3>&#8377; <?= ($payFees) ? $payFees : 0 ?></h3>
+				<h3><?=\Yii::$app->params['currencySymbol']?> <?= ($payFees) ? $payFees : 0 ?></h3>
 				<p><?php echo Yii::t('app', 'Total Paid Fees') ?></p>
 			    </div>
 			    <div class="icon">
-				<i class="fa fa-inr" style="font-size:55px"></i>
+				<i class="fa <?=\Yii::$app->params['currencyIcon']?>" style="font-size:55px"></i>
 			    </div>
 			</div><!---/. small-box-1--->
 			<div class="small-box bg-yellow">
 			   <div class="inner">
-				<h3>&#8377; <?= ($currentFeesData['paidFees']) ? $currentFeesData['paidFees'] : 0 ?></h3>
+				<h3><?=\Yii::$app->params['currencySymbol']?> <?= ($currentFeesData['paidFees']) ? $currentFeesData['paidFees'] : 0 ?></h3>
 				<p><?php echo Yii::t('app', 'Total paid Fees in active fees category') ?> </p>
 			    </div>
 			    <div class="icon">
-				<i class="fa fa-inr" style="font-size:65px"></i>
+				<i class="fa <?=\Yii::$app->params['currencyIcon']?>" style="font-size:65px"></i>
 			    </div>
 			</div><!---/. small-box-2--->
 			<div class="small-box bg-red">
 			   <div class="inner">
-				<h3>&#8377; <?= ($currentFeesData['unPaidFees']) ? $currentFeesData['unPaidFees'] : 0 ?></h3>
+				<h3><?=\Yii::$app->params['currencySymbol']?> <?= ($currentFeesData['unPaidFees']) ? $currentFeesData['unPaidFees'] : 0 ?></h3>
 				<p><?php echo Yii::t('app', 'Total unpaid Fees in active fees category') ?> </p>
 			    </div>
 			    <div class="icon">
-				<i class="fa fa-inr" style="font-size:65px"></i>
+				<i class="fa <?=\Yii::$app->params['currencyIcon']?>" style="font-size:65px"></i>
 			    </div>
 			</div><!---/. small-box-3--->
 		   </div><!---/. box-body--->

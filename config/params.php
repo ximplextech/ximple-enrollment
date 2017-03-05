@@ -1,5 +1,7 @@
 <?php
 
 return [
-    'adminEmail' => 'info@rudrasoftech.com',
+    'adminEmail' => 'ximplexsoft@gmail.com',
+    'currencyIcon' => 'fa-usd',
+    'currencySymbol' => '$',
 ];

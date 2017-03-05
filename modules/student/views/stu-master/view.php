@@ -96,7 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			<li id = "address-tab"><a href="#address" data-toggle="tab"><i class="fa fa-home"></i> <?php echo Yii::t('stu', 'Address'); ?></a></li>
 			<li id = "documents-tab"><a href="#documents" data-toggle="tab"><i class="fa fa-file-text"></i> <?php echo Yii::t('stu', 'Documents'); ?></a></li>
 			 <?php if(!Yii::$app->session->get('stu_id')) : ?>
-				<li id = "fees-tab"><a href="#fees" data-toggle="tab"><i class="fa fa-inr"></i> <?php echo Yii::t('stu', 'Fees'); ?></a></li>
+				<li id = "fees-tab"><a href="#fees" data-toggle="tab"><i class="fa <?=\Yii::$app->params['currencyIcon']?>"></i> <?php echo Yii::t('stu', 'Fees'); ?></a></li>
 			<?php endif; ?>
 		</ul>
 		 <div id='content' class="tab-content responsive">

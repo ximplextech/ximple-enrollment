@@ -63,7 +63,7 @@ use yii\grid\GridView;
 <!---Start Display Block For Fees Collection Category Details--->
 <div class="<?php echo $model->isNewRecord ? 'box-success' : 'box-info'; ?> box col-xs-12 col-lg-12 no-padding">
 <div class="box-header with-border">
-	<h3 class="box-title"><i class="fa fa-inr"></i><sub><i class="fa fa-info-circle"></i></sub> <?php echo Yii::t('fees', 'Fees Collection Category'); ?> :  <?php echo $FccModel->fees_collect_name;?></h3>
+	<h3 class="box-title"><i class="fa <?=\Yii::$app->params['currencyIcon']?>"></i><sub><i class="fa fa-info-circle"></i></sub> <?php echo Yii::t('fees', 'Fees Collection Category'); ?> :  <?php echo $FccModel->fees_collect_name;?></h3>
 </div>
 <div class="box-body table-responsive">
 <?php
@@ -213,7 +213,7 @@ $feesDetails = \app\modules\fees\models\FeesCategoryDetails::find()->where(['fee
 <!---Start Student Payment History Block--->
 <div class="<?php echo $model->isNewRecord ? 'box-success' : 'box-info'; ?> box col-xs-12 col-lg-12 no-padding">
 <div class="box-header with-border">
-	<h3 class="box-title"><i class="fa fa-inr"></i><sup><i class="fa fa-clock-o"></i></sup> <?= Yii::t('fees', 'Payment History') ?></h3>
+	<h3 class="box-title"><i class="fa <?=\Yii::$app->params['currencyIcon']?>"></i><sup><i class="fa fa-clock-o"></i></sup> <?= Yii::t('fees', 'Payment History') ?></h3>
 </div>
 <div class="box-body table-responsive no-padding">
 <?php
