@@ -101,7 +101,6 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@bower') . '/admin-l
 
 <div class="login-footer"> 
     <strong>Copyright &copy; <?= date('Y') ?> <a href="http://ximplexsoft.com">XimpleX Software</a>.</strong> All rights reserved.
-<!--    <br>Powered by RUDRA SOFTECH-->
 </div>
 <?php $this->endBody() ?>
 </body>

@@ -134,7 +134,7 @@ $config = [
 			'timeFormat' => 'php:H:i:s',
 			'decimalSeparator' => ',',
 			'thousandSeparator' => ' ',
-			'currencyCode' => 'Rs.',
+			'currencyCode' => 'USD',
 			'class' => 'yii\i18n\Formatter',
 		],
         	'db' => require(__DIR__ . '/db.php'),
@@ -155,6 +155,9 @@ $config = [
 	'fees' => 'app\modules\fees\FeesModule',
 	'report' => 'app\modules\report\Report',
 	'dashboard' => 'app\modules\dashboard\DashboardModule',
+        'building' => [
+            'class' => 'app\modules\building\BuildingModule',
+        ],
 	'rights' => [
         'class' => 'mdm\admin\Module',
 	    'controllerMap' => [
@@ -181,8 +184,8 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
 		'class'=>'yii\gii\Module',
-		'allowedIPs'=>['127.0.0.1','192.168.1.*'],
+		//'allowedIPs'=>['127.0.0.1','192.168.1.*'],
     ];
 }
-
+//print_r($config); die();
 return $config;
