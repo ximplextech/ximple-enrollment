@@ -161,6 +161,12 @@ $config = [
         'room' => [
             'class' => 'app\modules\room\RoomModule',
         ],
+        'semester' => [
+            'class' => 'app\modules\semester\SemesterModule',
+        ],
+        'schoolyear' => [
+            'class' => 'app\modules\schoolyear\SchoolyearModule',
+        ],
 	'rights' => [
         'class' => 'mdm\admin\Module',
 	    'controllerMap' => [
