@@ -59,6 +59,16 @@
 	    <li>
 		<?= Html::a('<i class="fa fa-angle-double-right"></i> '.Yii::t('app', 'Class Room'),['/room/room/index'])  ?>
 	    </li>
+	<?php } if(Yii::$app->user->can('/schoolyear/*')) {
+	?>
+	    <li>
+		<?= Html::a('<i class="fa fa-angle-double-right"></i> '.Yii::t('app', 'School Year'),['/schoolyear/schoolyear/index'])  ?>
+	    </li>
+	<?php } if(Yii::$app->user->can('/semester/*')) {
+	?>
+	    <li>
+		<?= Html::a('<i class="fa fa-angle-double-right"></i> '.Yii::t('app', 'Semester'),['/semester/semester/index'])  ?>
+	    </li>
 	<?php } ?>
 	   
         </ul>
