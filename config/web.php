@@ -167,6 +167,9 @@ $config = [
         'schoolyear' => [
             'class' => 'app\modules\schoolyear\SchoolyearModule',
         ],
+        'subjects' => [
+            'class' => 'app\modules\subjects\SubjectsModule',
+        ],
 	'rights' => [
         'class' => 'mdm\admin\Module',
 	    'controllerMap' => [

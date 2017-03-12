@@ -69,6 +69,11 @@
 	    <li>
 		<?= Html::a('<i class="fa fa-angle-double-right"></i> '.Yii::t('app', 'Semester'),['/semester/semester/index'])  ?>
 	    </li>
+	<?php } if(Yii::$app->user->can('/subjects/*')) {
+	?>
+	    <li>
+		<?= Html::a('<i class="fa fa-angle-double-right"></i> '.Yii::t('app', 'Subjects'),['/subjects/subjects/index'])  ?>
+	    </li>
 	<?php } ?>
 	   
         </ul>

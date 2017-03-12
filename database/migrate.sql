@@ -8,16 +8,18 @@
  * Created: Mar 11, 2017
  */
 
-INSERT INTO `enrollment_system`.`auth_item` (`name`, `type`, `description`) VALUES ('gii', '1', 'Gii Editor');
-INSERT INTO `enrollment_system`.`auth_item_child` (`parent`, `child`) VALUES ('SuperAdmin', 'gii');
-INSERT INTO `enrollment_system`.`auth_item` (`name`, `type`, `description`) VALUES ('/building/*', '1', '/building/*');
-INSERT INTO `enrollment_system`.`auth_item_child` (`parent`, `child`) VALUES ('SuperAdmin', '/building/*');
+REPLACE INTO `enrollment_system`.`auth_item` (`name`, `type`, `description`) VALUES ('gii', '2', 'Gii Editor');
+REPLACE INTO `enrollment_system`.`auth_item_child` (`parent`, `child`) VALUES ('SuperAdmin', 'gii');
+REPLACE INTO `enrollment_system`.`auth_item` (`name`, `type`, `description`) VALUES ('/building/*', '2', '/building/*');
+REPLACE INTO `enrollment_system`.`auth_item_child` (`parent`, `child`) VALUES ('SuperAdmin', '/building/*');
 UPDATE `enrollment_system`.`auth_item` SET `type`='2' WHERE `name`='gii';
 UPDATE `enrollment_system`.`auth_item` SET `type`='2' WHERE `name`='/building/*';
-INSERT INTO `enrollment_system`.`auth_item` (`name`, `type`, `description`) VALUES ('/room/*', '1', '/room/*');
-INSERT INTO `enrollment_system`.`auth_item_child` (`parent`, `child`) VALUES ('SuperAdmin', '/room/*');
-INSERT INTO `enrollment_system`.`auth_item` (`name`, `type`, `description`) VALUES ('/schoolyear/*', '1', '/schoolyear/*');
-INSERT INTO `enrollment_system`.`auth_item_child` (`parent`, `child`) VALUES ('SuperAdmin', '/schoolyear/*');
-INSERT INTO `enrollment_system`.`auth_item` (`name`, `type`, `description`) VALUES ('/semester/*', '1', '/semester/*');
-INSERT INTO `enrollment_system`.`auth_item_child` (`parent`, `child`) VALUES ('SuperAdmin', '/semester/*');
+REPLACE INTO `enrollment_system`.`auth_item` (`name`, `type`, `description`) VALUES ('/room/*', '2', '/room/*');
+REPLACE INTO `enrollment_system`.`auth_item_child` (`parent`, `child`) VALUES ('SuperAdmin', '/room/*');
+REPLACE INTO `enrollment_system`.`auth_item` (`name`, `type`, `description`) VALUES ('/schoolyear/*', '2', '/schoolyear/*');
+REPLACE INTO `enrollment_system`.`auth_item_child` (`parent`, `child`) VALUES ('SuperAdmin', '/schoolyear/*');
+REPLACE INTO `enrollment_system`.`auth_item` (`name`, `type`, `description`) VALUES ('/semester/*', '2', '/semester/*');
+REPLACE INTO `enrollment_system`.`auth_item_child` (`parent`, `child`) VALUES ('SuperAdmin', '/semester/*');
+REPLACE INTO `enrollment_system`.`auth_item` (`name`, `type`, `description`) VALUES ('/subjects/*', '2', '/subjects/*');
+REPLACE INTO `enrollment_system`.`auth_item_child` (`parent`, `child`) VALUES ('SuperAdmin', '/subjects/*');
 
