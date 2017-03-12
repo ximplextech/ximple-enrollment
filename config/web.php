@@ -158,6 +158,9 @@ $config = [
         'building' => [
             'class' => 'app\modules\building\BuildingModule',
         ],
+        'room' => [
+            'class' => 'app\modules\room\RoomModule',
+        ],
 	'rights' => [
         'class' => 'mdm\admin\Module',
 	    'controllerMap' => [

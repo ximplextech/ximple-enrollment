@@ -4,20 +4,20 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\building\models\Building */
+/* @var $model app\modules\room\models\Room */
 
-$this->title = $model->building_id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Buildings'), 'url' => ['index']];
+$this->title = $model->room_id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Rooms'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="building-view">
+<div class="room-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a(Yii::t('app', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->building_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->building_id], [
+        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->room_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->room_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
@@ -30,8 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'building_id',
-            'building_name',
+            'room_id',
+            'room_name',
+            //'building_id',
+            [
+		'label' => Yii::t('app', 'Building'),
+		'attribute' => 'building_id',
+		'value' => $model->building->building_name,
+ 	    ],
+            
             //'longitude',
             //'latitude',
             [

@@ -48,6 +48,17 @@
 	    <li>
 		<?= Html::a('<i class="fa fa-angle-double-right"></i> '.Yii::t('app', 'Institute'),['/organization/index'])  ?>
 	    </li>
+	<?php }
+	      if(Yii::$app->user->can('/building/*')) {
+	?>
+	    <li>
+		<?= Html::a('<i class="fa fa-angle-double-right"></i> '.Yii::t('app', 'Building'),['/building/building/index'])  ?>
+	    </li>
+	<?php } if(Yii::$app->user->can('/room/*')) {
+	?>
+	    <li>
+		<?= Html::a('<i class="fa fa-angle-double-right"></i> '.Yii::t('app', 'Class Room'),['/room/room/index'])  ?>
+	    </li>
 	<?php } ?>
 	   
         </ul>

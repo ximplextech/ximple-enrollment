@@ -12,4 +12,6 @@ INSERT INTO `enrollment_system`.`auth_item` (`name`, `type`, `description`) VALU
 INSERT INTO `enrollment_system`.`auth_item_child` (`parent`, `child`) VALUES ('SuperAdmin', 'gii');
 INSERT INTO `enrollment_system`.`auth_item` (`name`, `type`, `description`) VALUES ('/building/*', '1', '/building/*');
 INSERT INTO `enrollment_system`.`auth_item_child` (`parent`, `child`) VALUES ('SuperAdmin', '/building/*');
+UPDATE `enrollment_system`.`auth_item` SET `type`='2' WHERE `name`='gii';
+UPDATE `enrollment_system`.`auth_item` SET `type`='2' WHERE `name`='/building/*';
 
