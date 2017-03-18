@@ -15,6 +15,8 @@ use kartik\switchinput\SwitchInput;
     <?php $form = ActiveForm::begin(); ?>
     
     <?= $form->field($model, 'course_id')->dropDownList(ArrayHelper::map(\app\modules\course\models\Courses::find()->all(),'course_id','course_code'),['prompt'=>Yii::t('app', 'Select Course')]); ?>
+        
+    <?= $form->field($model, 'batch_id')->dropDownList(ArrayHelper::map(\app\modules\course\models\Batches::find()->all(),'batch_id','batch_alias'),['prompt'=>Yii::t('app', 'Select Batch')]); ?>
 
     <?= $form->field($model, 'subject_name')->textInput(['maxlength' => 45]) ?>
 

@@ -36,6 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
 		'value'=>(!empty($model->course->course_id) ? $model->course->course_code : "Not Set")
 	    ],
             
+            [
+		'attribute'=>'batch_id',
+		'value'=>(!empty($model->batch->batch_id) ? $model->batch->batch_alias : "Not Set")
+	    ],
+            
             'subject_name',
             'status',
            

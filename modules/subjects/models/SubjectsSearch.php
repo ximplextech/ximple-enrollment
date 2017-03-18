@@ -18,7 +18,7 @@ class SubjectsSearch extends Subjects
     public function rules()
     {
         return [
-            [['subject_id', 'status', 'course_id', 'created_by', 'updated_by'], 'integer'],
+            [['subject_id', 'status', 'course_id', 'batch_id', 'created_by', 'updated_by'], 'integer'],
             [['subject_name', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -59,6 +59,7 @@ class SubjectsSearch extends Subjects
             'subject_id' => $this->subject_id,
             'status' => $this->status,
             'course_id' => $this->course_id,
+            'batch_id' => $this->batch_id,
             'created_at' => $this->created_at,
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,

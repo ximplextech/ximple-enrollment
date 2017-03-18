@@ -31,6 +31,11 @@ $this->params['breadcrumbs'][] = $this->title;
 		'attribute' => 'course_id',
 		'value' =>'course.course_code',
  	    ],
+            [
+		'label' => Yii::t('app', 'Batch'),
+		'attribute' => 'batch_id',
+		'value' =>'batch.batch_alias',
+ 	    ],
             'subject_name',
             'status',
             
