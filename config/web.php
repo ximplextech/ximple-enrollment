@@ -1,35 +1,4 @@
 <?php
-/*****************************************************************************************
- * EduSec  Open Source Edition is a School / College management system developed by
- * RUDRA SOFTECH. Copyright (C) 2010-2015 RUDRA SOFTECH.
-
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
-
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
-
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses. 
-
- * You can contact RUDRA SOFTECH, 1st floor Geeta Ceramics, 
- * Opp. Thakkarnagar BRTS station, Ahmedbad - 382350, India or
- * at email address info@rudrasoftech.com.
- * 
- * The interactive user interfaces in modified source and object code versions
- * of this program must display Appropriate Legal Notices, as required under
- * Section 5 of the GNU Affero General Public License version 3.
- 
- * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
- * these Appropriate Legal Notices must retain the display of the "Powered by
- * RUDRA SOFTECH" logo. If the display of the logo is not reasonably feasible for
- * technical reasons, the Appropriate Legal Notices must display the words
- * "Powered by RUDRA SOFTECH".
- *****************************************************************************************/
 
 $params = require(__DIR__ . '/params.php');
 
@@ -170,6 +139,9 @@ $config = [
         'subjects' => [
             'class' => 'app\modules\subjects\SubjectsModule',
         ],
+        'classschedule' => [
+            'class' => 'app\modules\classschedule\ClassScheduleModule',
+        ],
 	'rights' => [
         'class' => 'mdm\admin\Module',
 	    'controllerMap' => [
@@ -195,8 +167,22 @@ if (YII_ENV_DEV) {
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
-		'class'=>'yii\gii\Module',
-		//'allowedIPs'=>['127.0.0.1','192.168.1.*'],
+        'class' => 'yii\gii\Module',
+        'generators' => [ //here
+            'crud' => [ // generator name
+                'class' => 'yii\gii\generators\crud\Generator', // generator class
+                'templates' => [ //setting for out templates
+                    'backendCrud' => '@app/templates/crud/default', // template name => path to template
+                ]
+            ],
+            'model' => [ // generator name
+                'class' => 'yii\gii\generators\model\Generator', // generator class
+                'templates' => [ //setting for out templates
+                    'backendModel' => '@app/templates/model/default', // template name => path to template
+                ]
+            ],
+            
+        ],
     ];
 }
 //print_r($config); die();
