@@ -19,7 +19,7 @@ class SemesterSearch extends Semester
     {
         return [
             [['semester_id', 'created_by', 'updated_by'], 'integer'],
-            [['semester_name', 'created_at', 'updated_at'], 'safe'],
+            [['semester_name', 'start_date', 'end_date', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -57,6 +57,8 @@ class SemesterSearch extends Semester
 
         $query->andFilterWhere([
             'semester_id' => $this->semester_id,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
             'created_at' => $this->created_at,
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,

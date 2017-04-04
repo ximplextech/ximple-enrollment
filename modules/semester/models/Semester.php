@@ -9,6 +9,8 @@ use Yii;
  *
  * @property integer $semester_id
  * @property string $semester_name
+ * @property string $start_date
+ * @property string $end_date
  * @property string $created_at
  * @property integer $created_by
  * @property string $updated_at
@@ -34,8 +36,8 @@ class Semester extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['semester_name', 'created_by', 'updated_by'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['semester_name', 'start_date', 'end_date', 'created_by', 'updated_by'], 'required'],
+            [['start_date', 'end_date', 'created_at', 'updated_at'], 'safe'],
             [['created_by', 'updated_by'], 'integer'],
             [['semester_name'], 'string', 'max' => 45]
         ];
@@ -49,6 +51,8 @@ class Semester extends \yii\db\ActiveRecord
         return [
             'semester_id' => Yii::t('app', 'Semester ID'),
             'semester_name' => Yii::t('app', 'Semester Name'),
+            'start_date' => Yii::t('app', 'Start Date'),
+            'end_date' => Yii::t('app', 'End Date'),
             'created_at' => Yii::t('app', 'Created At'),
             'created_by' => Yii::t('app', 'Created By'),
             'updated_at' => Yii::t('app', 'Updated At'),
@@ -69,7 +73,7 @@ class Semester extends \yii\db\ActiveRecord
      */
     public function getCreatedBy()
     {
-        return $this->hasOne(\app\models\User::className(), ['user_id' => 'created_by']);
+        return $this->hasOne(Users::className(), ['user_id' => 'created_by']);
     }
 
     /**
@@ -77,6 +81,6 @@ class Semester extends \yii\db\ActiveRecord
      */
     public function getUpdatedBy()
     {
-        return $this->hasOne(\app\models\User::className(), ['user_id' => 'updated_by']);
+        return $this->hasOne(Users::className(), ['user_id' => 'updated_by']);
     }
 }

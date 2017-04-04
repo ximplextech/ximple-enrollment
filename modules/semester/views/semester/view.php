@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
+         <?= Html::a(Yii::t('app', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->semester_id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->semester_id], [
             'class' => 'btn btn-danger',
@@ -32,22 +32,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'semester_id',
             'semester_name',
-            [
-		'attribute' => 'created_at',
-		'value' => Yii::$app->formatter->asDateTime($model->created_at),
-	    ],
-            [
-		'attribute'=>'created_by',
-		'value'=>(!empty($model->createdBy->user_login_id) ? $model->createdBy->user_login_id : "Not Set")
-	    ],
-	    [
-		'attribute' => 'updated_at',
-		'value' => ($model->updated_at == null) ? " - ": Yii::$app->formatter->asDateTime($model->updated_at),
-	    ],
-	    [
-		'attribute'=>'updated_by',
-		'value'=>(!empty($model->updatedBy->user_login_id) ? $model->updatedBy->user_login_id : "Not Set")
-	    ],
+            'start_date',
+            'end_date',
+            'created_at',
+            'created_by',
+            'updated_at',
+            'updated_by',
         ],
     ]) ?>
 

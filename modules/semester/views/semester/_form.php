@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\widgets\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\semester\models\Semester */
@@ -13,8 +14,23 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'semester_name')->textInput(['maxlength' => 45]) ?>
+    
+    <?php echo $form->field($model, 'start_date')->widget(DatePicker::classname(), [
+    'options' => ['placeholder' => Yii::t('app', 'Enter Start of the Semester') .' ...'],
+    'pluginOptions' => [
+        'autoclose'=>true,
+        'format' => 'yyyy-mm-dd'
+    ]
+]); ?>
+    <?php echo $form->field($model, 'end_date')->widget(DatePicker::classname(), [
+    'options' => ['placeholder' => Yii::t('app', 'Enter End of the Semester') .' ...'],
+    'pluginOptions' => [
+        'autoclose'=>true,
+        'format' => 'yyyy-mm-dd'
+    ]
+]); ?>
 
-   <?php
+    <?php
     /**
      * Hidden inputs
      */

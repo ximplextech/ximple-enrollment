@@ -66,11 +66,11 @@ class ClassSchedule extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'class_schedule_id' => Yii::t('app', 'Class Schedule ID'),
-            'subject_id' => Yii::t('app', 'Subject ID'),
-            'school_year_id' => Yii::t('app', 'School Year ID'),
-            'semester_id' => Yii::t('app', 'Semester ID'),
-            'professor_id' => Yii::t('app', 'Professor ID'),
+            'class_schedule_id' => Yii::t('app', 'Class Schedule'),
+            'subject_id' => Yii::t('app', 'Subject'),
+            'school_year_id' => Yii::t('app', 'School Year'),
+            'semester_id' => Yii::t('app', 'Semester'),
+            'professor_id' => Yii::t('app', 'Professor'),
             'start_time' => Yii::t('app', 'Start Time'),
             'end_time' => Yii::t('app', 'End Time'),
             'sun' => Yii::t('app', 'Sun'),

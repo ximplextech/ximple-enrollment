@@ -118,7 +118,7 @@ EOF;
                             'clientOptions' => [
                                 'defaultView' => 'agendaWeek',
                                 'fixedWeekCount' => false,
-                                'weekNumbers' => true,
+                                'weekNumbers' => false,
                                 'editable' => true,
                                 'selectable' => true,
                                 'eventLimit' => true,
@@ -133,7 +133,10 @@ EOF;
                                 'eventClick' => new \yii\web\JsExpression($JSEventClick),
                                 'eventRender' => new \yii\web\JsExpression($JsF),
                                 'aspectRatio' => 2,
-                                'timeFormat' => 'hh(:mm) A'
+                                'timeFormat' => 'hh(:mm) A',
+                                'minTime' => "07:00:00",
+                                'maxTime' => "21:00:00",
+                                'allDaySlot' => false,
                             ],
                             'ajaxEvents' => Url::toRoute(['/dashboard/events/view-events'])
                         ]);

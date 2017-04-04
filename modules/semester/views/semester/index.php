@@ -27,9 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'semester_id',
             'semester_name',
-//            'created_at',
-//            'created_by',
-//            'updated_at',
+            'start_date',
+            'end_date',
+            //'created_at',
+            // 'created_by',
+            // 'updated_at',
             // 'updated_by',
 
             ['class' => 'yii\grid\ActionColumn'],

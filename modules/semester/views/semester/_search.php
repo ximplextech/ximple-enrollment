@@ -19,11 +19,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'semester_name') ?>
 
-    <?= $form->field($model, 'created_at') ?>
+    <?= $form->field($model, 'start_date') ?>
 
-    <?= $form->field($model, 'created_by') ?>
+    <?= $form->field($model, 'end_date') ?>
 
-    <?= $form->field($model, 'updated_at') ?>
+    <?php // echo  $form->field($model, 'created_at') ?>
+
+    <?php // echo $form->field($model, 'created_by') ?>
+
+    <?php // echo $form->field($model, 'updated_at') ?>
 
     <?php // echo $form->field($model, 'updated_by') ?>
 
