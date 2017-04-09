@@ -107,14 +107,14 @@ if (isset($_REQUEST['event_id'])) {
             ]);
             ?>
         </div>
-        <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 80px">
+        <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 65px">
             <?=
             $form->field($model, 'sun')->widget(SwitchInput::classname(), [
                 'pluginOptions' => ['size' => 'mini'],
                 'labelOptions' => ['style' => 'font-size: 12px'],]);
             ?>
         </div>
-        <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 80px">
+        <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 65px">
             <?=
             $form->field($model, 'mon')->widget(SwitchInput::classname(), [
                 'pluginOptions' => ['size' => 'mini'],
@@ -122,7 +122,7 @@ if (isset($_REQUEST['event_id'])) {
             ]);
             ?>
         </div>
-        <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 80px">
+        <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 65px">
             <?=
             $form->field($model, 'tue')->widget(SwitchInput::classname(), [
                 'pluginOptions' => ['size' => 'mini'],
@@ -130,7 +130,7 @@ if (isset($_REQUEST['event_id'])) {
             ]);
             ?>
         </div>
-        <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 80px">
+        <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 65px">
             <?=
             $form->field($model, 'wed')->widget(SwitchInput::classname(), [
                 'pluginOptions' => ['size' => 'mini'],
@@ -138,7 +138,7 @@ if (isset($_REQUEST['event_id'])) {
             ]);
             ?>
         </div>
-        <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 80px">
+        <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 65px">
             <?=
             $form->field($model, 'thu')->widget(SwitchInput::classname(), [
                 'pluginOptions' => ['size' => 'mini'],
@@ -146,7 +146,7 @@ if (isset($_REQUEST['event_id'])) {
             ]);
             ?>
         </div>
-        <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 80px">
+        <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 65px">
             <?=
             $form->field($model, 'fri')->widget(SwitchInput::classname(), [
                 'pluginOptions' => ['size' => 'mini'],
@@ -154,7 +154,7 @@ if (isset($_REQUEST['event_id'])) {
             ]);
             ?>
         </div>
-        <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 80px">
+        <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 65px">
             <?=
             $form->field($model, 'sat')->widget(SwitchInput::classname(), [
                 'pluginOptions' => ['size' => 'mini'],
@@ -164,9 +164,9 @@ if (isset($_REQUEST['event_id'])) {
         </div>
         <div class="col-xs-12"></div>
 
-        <div class="form-group col-xs-12 col-sm-6 col-lg-5 no-padding edusecArLangCss">
+        <div class="form-group col-xs-12 col-sm-12 col-lg-12 no-padding edusecArLangCss">
             <div class="col-xs-6">
-                <?= Html::button($model->isNewRecord ? Yii::t('dash', 'Create') : Yii::t('dash', 'Update'), ['id' => 'save', 'class' => $model->isNewRecord ? 'btn btn-success btn-block' : 'btn btn-info btn-block']) ?> 
+                <?= Html::button($model->isNewRecord ? Yii::t('dash', 'Add Schedule') : Yii::t('dash', 'Update'), ['id' => 'save', 'class' => $model->isNewRecord ? 'btn btn-success btn-block' : 'btn btn-info btn-block']) ?> 
             </div>
             <div class="col-xs-6">
                 <?php

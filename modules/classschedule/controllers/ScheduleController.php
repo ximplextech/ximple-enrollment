@@ -71,6 +71,8 @@ class ScheduleController extends Controller
 		$model->attributes = $_POST['ClassScheduleTemporary'];
 		$model->start_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['ClassScheduleTemporary']['start_date']);
 		$model->end_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['ClassScheduleTemporary']['end_date']);
+                $model->start_time = Yii::$app->dateformatter->storeTimeFormat($_POST['ClassScheduleTemporary']['start_time']);
+		$model->end_time = Yii::$app->dateformatter->storeTimeFormat($_POST['ClassScheduleTemporary']['end_time']);
 		$model->created_by = Yii::$app->getid->getId();
 		$model->created_at = new \yii\db\Expression('NOW()');
                 $model->updated_by = Yii::$app->getid->getId();

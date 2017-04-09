@@ -85,6 +85,12 @@ class DateFormat extends Component
                 $datet = (!empty($param) ? date('Y-m-d H:i:s',strtotime($param)) : NULL);
                 return $datet;
         }
+        
+        public function storeTimeFormat($param)
+        {
+                $datet = (!empty($param) ? date('H:i:s',strtotime($param)) : NULL);
+                return $datet;
+        }
 
 	public function getDateDisplay($param)
         {

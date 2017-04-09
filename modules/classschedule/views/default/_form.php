@@ -13,7 +13,7 @@ use yii\helpers\Url;
 <div class="class-schedule-form">
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="row">
                 <div class="col-md-6">
                     <?= $form->field($model, 'school_year_id')->dropDownList(ArrayHelper::map(app\modules\schoolyear\models\Schoolyear::find()->all(), 'school_year_id', 'school_year_alias'), ['prompt' => Yii::t('app', 'Select School Year')]); ?>
@@ -44,20 +44,13 @@ use yii\helpers\Url;
 
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <?=
-                    $this->renderAjax('_form', [
-                        'modelEvents' => $modelEvents,
-                    ]);
-                    ?>
+            <div class="row" id="eventModal" style="display: none">
 
-                </div>
 
             </div>
 
         </div>
-        <div class="col-md-8" style="margin-top: -120px;">
+        <div class="col-md-6" style="margin-top: -120px;">
             <div class="box-body">
                 <?php
                 $AEurl = Url::to(["schedule/add-event"]);
@@ -72,10 +65,12 @@ use yii\helpers\Url;
 		   data: { start_date : start, end_date : end, return_dashboard : 1 },
 		   type: "GET",
 		   success: function(data) {
-			   $(".modal-body").addClass("row");
-			   $(".modal-header").html('<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button><h3>{$AddEvent}</h3>');
-			   $('.modal-body').html(data);
-			   $('#eventModal').modal();
+//			   $(".modal-body").addClass("row");
+//			   $(".modal-header").html('<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button><h3>{$AddEvent}</h3>');
+//			   $('.modal-body').html(data);
+//			   $('#eventModal').modal();
+                           $('#eventModal').html('<div class="col-md-12">' + data + '</div>');
+			   $('#eventModal').show();
 		   }
 	   	});
 			}
@@ -89,10 +84,10 @@ EOF;
 		   data: { event_id : eventId, return_dashboard : 1 },
 		   type: "GET",
 		   success: function(data) {
-			   $(".modal-body").addClass("row");
-			   $(".modal-header").html('<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button><h3> {$updateEvent} </h3>');
-			   $('.modal-body').html(data);
-			   $('#eventModal').modal();
+			   //$(".modal-body").addClass("row");
+			   //$(".modal-header").html('<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button><h3> {$updateEvent} </h3>');
+			   $('#eventModal').html('<div class="col-md-12">' + data + '</div>');
+			   $('#eventModal').show();
 		   }
 	   	});
 		$(this).css('border-color', 'red');
@@ -148,7 +143,7 @@ EOF;
                                 'minTime' => "07:00:00",
                                 'maxTime' => "21:00:00",
                                 'allDaySlot' => false,
-                                'columnFormat' => 'dddd'
+                                'columnFormat' => 'ddd'
                             ],
                             'ajaxEvents' => Url::toRoute(['/classschedule/schedule/view-events'])
                         ]);
@@ -185,20 +180,39 @@ EOF;
     }
     ?>
     <div class="form-group">
-<?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    <?= Html::a(Yii::t('app', 'Back to list'), ['index'], ['class' => 'btn btn-default']); ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Back to list'), ['index'], ['class' => 'btn btn-default']); ?>
     </div>
 
-<?php ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?>
 
 </div>
 
 <?php
-yii\bootstrap\Modal::begin([
-    'id' => 'eventModal',
-    'header' => "<h3>" . Yii::t('dash', 'Add Class Schedule') . "</h3>",
-]);
-
-yii\bootstrap\Modal::end();
+//yii\bootstrap\Modal::begin([
+//    'id' => 'eventModal',
+//    'header' => "<h3>" . Yii::t('dash', 'Add Class Schedule') . "</h3>",
+//]);
+//
+//yii\bootstrap\Modal::end();
 ?>
+<script>
+    $(document).ready(function () {
+        $("#w1").css({"visibility": "hidden"});
+        $('.form-control').blur(function () {
+            var empty_flds = 0;
+            $('.form-control').each(function () {
+                if ($(this).parent().hasClass("required") && $(this).val() == "") {
+                    empty_flds++;
+                }
+            });
+            if (empty_flds == 0) {
+                $("#w1").css({"visibility": "visible"});
+            }else{
+                $("#w1").css({"visibility": "hidden"});
+            }
+        });
+    });
+
+</script>
 
