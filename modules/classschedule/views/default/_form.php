@@ -15,43 +15,54 @@ use yii\helpers\Url;
     <div class="row">
         <div class="col-md-4">
             <div class="row">
-                <div class="col-md-12">
-                    <?= $form->field($model, 'subject_id')->dropDownList(ArrayHelper::map(app\modules\subjects\models\Subjects::find()->all(), 'subject_id', 'subject_name'), ['prompt' => Yii::t('app', 'Select Subject')]); ?>
+                <div class="col-md-6">
+                    <?= $form->field($model, 'school_year_id')->dropDownList(ArrayHelper::map(app\modules\schoolyear\models\Schoolyear::find()->all(), 'school_year_id', 'school_year_alias'), ['prompt' => Yii::t('app', 'Select School Year')]); ?>
 
                 </div>
-            </div>
-            <div class="row">
-               <div class="col-md-12">
+                <div class="col-md-6">
                     <?= $form->field($model, 'semester_id')->dropDownList(ArrayHelper::map(\app\modules\semester\models\Semester::find()->all(), 'semester_id', 'semester_name'), ['prompt' => Yii::t('app', 'Select Semester')]); ?>
 
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <?= $form->field($model, 'professor_id')->dropDownList(ArrayHelper::map(app\modules\employee\models\EmpMaster::find()->all(), 'emp_master_user_id', 'emp_master_user_id'), ['prompt' => Yii::t('app', 'Select Professor')]); ?>
+                <div class="col-md-6">
+                    <?= $form->field($model, 'professor_id')->dropDownList(ArrayHelper::map(app\modules\employee\models\EmpInfo::find()->all(), 'emp_info_id', 'EmpFullName'), ['prompt' => Yii::t('app', 'Select Professor')]); ?>
+
+                </div>
+                <div class="col-md-6">
+                    <?= $form->field($model, 'subject_id')->dropDownList(ArrayHelper::map(app\modules\subjects\models\Subjects::find()->all(), 'subject_id', 'subject_name'), ['prompt' => Yii::t('app', 'Select Subject')]); ?>
 
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <?= $form->field($model, 'section_id')->dropDownList(ArrayHelper::map(\app\modules\course\models\Section::find()->all(), 'section_id', 'section_name'), ['prompt' => Yii::t('app', 'Select Section')]); ?>
 
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <?= $form->field($model, 'class_intake_limit')->textInput() ?>
 
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <?=
+                    $this->renderAjax('_form', [
+                        'modelEvents' => $modelEvents,
+                    ]);
+                    ?>
+
+                </div>
+
+            </div>
 
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8" style="margin-top: -120px;">
             <div class="box-body">
                 <?php
-                $AEurl = Url::to(["events/add-event"]);
-                $UEurl = Url::to(["events/update-event"]);
-                $AddEvent = Yii::t('dash', 'Add Event');
+                $AEurl = Url::to(["schedule/add-event"]);
+                $UEurl = Url::to(["schedule/update-event"]);
+                $AddEvent = Yii::t('dash', 'Add Class Schedule');
                 $JSEvent = <<<EOF
 	function(start, end, allDay) {
 		var start = moment(start).unix();
@@ -114,7 +125,7 @@ EOF;
                     <div class="col-sm-12 col-xs-12">
                         <?=
                         \yii2fullcalendar\yii2fullcalendar::widget([
-                            'options' => ['language' => 'en'],
+                            //'options' => ['language' => 'en'],
                             'clientOptions' => [
                                 'defaultView' => 'agendaWeek',
                                 'fixedWeekCount' => false,
@@ -125,33 +136,34 @@ EOF;
                                 'eventLimitText' => 'more Events',
                                 'selectHelper' => true,
                                 'header' => [
-                                    'left' => 'today prev,next',
-                                    'center' => 'title',
-                                    'right' => 'agendaWeek,agendaDay'
+                                    'left' => '',
+                                    'center' => '',
+                                    'right' => ''
                                 ],
                                 'select' => new \yii\web\JsExpression($JSEvent),
                                 'eventClick' => new \yii\web\JsExpression($JSEventClick),
                                 'eventRender' => new \yii\web\JsExpression($JsF),
-                                'aspectRatio' => 2,
+                                'aspectRatio' => 1,
                                 'timeFormat' => 'hh(:mm) A',
                                 'minTime' => "07:00:00",
                                 'maxTime' => "21:00:00",
                                 'allDaySlot' => false,
+                                'columnFormat' => 'dddd'
                             ],
-                            'ajaxEvents' => Url::toRoute(['/dashboard/events/view-events'])
+                            'ajaxEvents' => Url::toRoute(['/classschedule/schedule/view-events'])
                         ]);
                         ?>
                     </div>
                 </div> <!-- /.End ROW -->
                 <div class="row">
-<!--                    <div class="col-sm-12 col-xs-12">
-                        <ul class="legend">
-                            <li><span class="holiday"></span> <?php echo Yii::t('dash', 'Holiday') ?></li>
-                            <li><span class="importantnotice"></span> <?php echo Yii::t('dash', 'Important Notice') ?></li>
-                            <li><span class="meeting"></span> <?php echo Yii::t('dash', 'Meeting') ?></li>
-                            <li><span class="messages"></span> <?php echo Yii::t('dash', 'Messages') ?></li>
-                        </ul>
-                    </div>-->
+                    <!--                    <div class="col-sm-12 col-xs-12">
+                                            <ul class="legend">
+                                                <li><span class="holiday"></span> <?php echo Yii::t('dash', 'Holiday') ?></li>
+                                                <li><span class="importantnotice"></span> <?php echo Yii::t('dash', 'Important Notice') ?></li>
+                                                <li><span class="meeting"></span> <?php echo Yii::t('dash', 'Meeting') ?></li>
+                                                <li><span class="messages"></span> <?php echo Yii::t('dash', 'Messages') ?></li>
+                                            </ul>
+                                        </div>-->
                 </div>
 
             </div><!-- /.box-body -->
@@ -173,18 +185,20 @@ EOF;
     }
     ?>
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+<?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <?= Html::a(Yii::t('app', 'Back to list'), ['index'], ['class' => 'btn btn-default']); ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
 
 </div>
 
 <?php
-	yii\bootstrap\Modal::begin([
-		'id' => 'eventModal',
-		'header' => "<h3>".Yii::t('dash', 'Add Event')."</h3>",
-	]);
+yii\bootstrap\Modal::begin([
+    'id' => 'eventModal',
+    'header' => "<h3>" . Yii::t('dash', 'Add Class Schedule') . "</h3>",
+]);
 
-	yii\bootstrap\Modal::end(); 
+yii\bootstrap\Modal::end();
 ?>
+

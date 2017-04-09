@@ -27,11 +27,13 @@ use Yii;
  * @property integer $updated_by
  * @property integer $section_id
  * @property integer $class_intake_limit
+ * @property string $start_date
+ * @property string $end_date
  *
  * @property Subjects $subject
  * @property SchoolYear $schoolYear
  * @property Semester $semester
- * @property EmpMaster $professor
+ * @property EmpInfo $professor
  * @property Users $createdBy
  * @property Users $updatedBy
  * @property Section $section
@@ -54,9 +56,9 @@ class ClassSchedule extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['subject_id', 'school_year_id', 'semester_id', 'professor_id', 'start_time', 'end_time', 'created_by', 'updated_by', 'section_id'], 'required'],
-            [['subject_id', 'school_year_id', 'semester_id', 'professor_id', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'created_by', 'updated_by', 'section_id', 'class_intake_limit'], 'integer'],
-            [['start_time', 'end_time', 'created_at', 'updated_at'], 'safe']
+            [['class_schedule_id', 'subject_id', 'school_year_id', 'semester_id', 'professor_id', 'start_time', 'end_time', 'created_by', 'updated_by', 'section_id'], 'required'],
+            [['class_schedule_id', 'subject_id', 'school_year_id', 'semester_id', 'professor_id', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'created_by', 'updated_by', 'section_id', 'class_intake_limit'], 'integer'],
+            [['start_time', 'end_time', 'created_at', 'updated_at', 'start_date', 'end_date'], 'safe']
         ];
     }
 
@@ -84,8 +86,10 @@ class ClassSchedule extends \yii\db\ActiveRecord
             'created_by' => Yii::t('app', 'Created By'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'updated_by' => Yii::t('app', 'Updated By'),
-            'section_id' => Yii::t('app', 'Section ID'),
+            'section_id' => Yii::t('app', 'Section'),
             'class_intake_limit' => Yii::t('app', 'Class Intake Limit'),
+            'start_date' => Yii::t('app', 'Start Date'),
+            'end_date' => Yii::t('app', 'End Date'),
         ];
     }
 
@@ -118,7 +122,7 @@ class ClassSchedule extends \yii\db\ActiveRecord
      */
     public function getProfessor()
     {
-        return $this->hasOne(EmpMaster::className(), ['emp_master_user_id' => 'professor_id']);
+        return $this->hasOne(EmpInfo::className(), ['emp_info_id' => 'professor_id']);
     }
 
     /**

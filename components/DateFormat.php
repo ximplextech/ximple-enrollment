@@ -55,6 +55,24 @@ class DateFormat extends Component
                 $datef = (!empty($param) ? date("d-m-Y H:i:s", $param) : NULL);
                 return $datef;
         }
+        
+        public function getTFormat($param) // for event time
+        {
+                $datef = (!empty($param) ? date("h:i:s a", $param - (60 * 60 * 2)) : NULL);
+                return $datef;
+        }
+        
+        public function getETFormat($param) // for event time
+        {
+                $datef = (!empty($param) ? date("h:i:s a", $param - (60 * 60 * 1)) : NULL);
+                return $datef;
+        }
+        
+        public function getDFormat($param) // for event date
+        {
+                $datef = (!empty($param) ? date("Y-m-d", $param) : NULL);
+                return $datef;
+        }
 
 	public function getDateTimeFormat($param)
         {

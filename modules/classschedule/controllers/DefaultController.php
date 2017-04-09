@@ -61,8 +61,12 @@ class DefaultController extends Controller
     public function actionCreate()
     {
         $model = new ClassSchedule();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//
+//        if(Yii::$app->request->post()){
+//            print_r(Yii::$app->request->post()); die();
+//        }
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
             return $this->redirect(['view', 'id' => $model->class_schedule_id]);
         } else {
             return $this->render('create', [

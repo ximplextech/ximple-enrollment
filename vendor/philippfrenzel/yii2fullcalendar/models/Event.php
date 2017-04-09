@@ -118,12 +118,14 @@ class Event extends Model
    * @var [type]
    */
   public $textColor;
+  
+  public $dow = [];
 
   public function rules()
   {
     return [
       ['id', 'integer'],
-      ['title, description, event_type, allDay, start, end, url, className, source, color, backgroundColor, borderColor, textColor', 'safe'],
+      ['title, description, event_type, allDay, start, end, url, className, source, color, backgroundColor, borderColor, textColor, dow', 'safe'],
       ['editable, startEditable, durationEditable', 'boolean'],
     ];
   }
