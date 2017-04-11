@@ -23,6 +23,8 @@ use Yii;
  * @property integer $created_by
  * @property string $updated_at
  * @property integer $updated_by
+ * @property string $title
+ * @property string $details
  *
  * @property Users $createdBy
  * @property Users $updatedBy
@@ -43,9 +45,11 @@ class ClassScheduleTemporary extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['class_schedule_id', 'start_time', 'end_time', 'created_by', 'updated_by'], 'required'],
-            [['class_schedule_id', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'created_by', 'updated_by'], 'integer'],
-            [['start_date', 'start_time', 'end_date', 'end_time', 'created_at', 'updated_at'], 'safe']
+            [['start_date', 'start_time', 'end_date', 'end_time', 'created_at', 'updated_at'], 'safe'],
+            [['start_time', 'end_time', 'created_by', 'updated_by'], 'required'],
+            [['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'created_by', 'updated_by'], 'integer'],
+            [['title'], 'string', 'max' => 45],
+            [['details'], 'string', 'max' => 100]
         ];
     }
 
@@ -71,6 +75,8 @@ class ClassScheduleTemporary extends \yii\db\ActiveRecord
             'created_by' => Yii::t('app', 'Created By'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'updated_by' => Yii::t('app', 'Updated By'),
+            'title' => Yii::t('app', 'Title'),
+            'details' => Yii::t('app', 'Details'),
         ];
     }
 

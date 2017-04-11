@@ -108,8 +108,8 @@ class ScheduleController extends Controller
 	    foreach ($eventList as $event) {
 	      $Event = new \yii2fullcalendar\models\Event();
 	      $Event->id = $event->class_schedule_id;
-	      $Event->title = "Class";
-	      $Event->description = "Class";
+	      $Event->title = $event->title;
+	      $Event->description = $event->details;
 	      $Event->start = $event->start_date . " ". $event->start_time;
 	      $Event->end = $event->end_date . " ". $event->end_time;
 	      $Event->color = '#00A65A'; //(($event->event_type == 1) ? '#00A65A' : (($event->event_type == 2) ? '#00C0EF' : (($event->event_type == 3) ? '#F39C12' : '#074979')));

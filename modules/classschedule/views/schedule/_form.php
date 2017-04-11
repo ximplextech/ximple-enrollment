@@ -51,7 +51,8 @@ if (isset($_REQUEST['event_id'])) {
             <h4><i class="icon fa fa-check"></i>Saved!</h4>
             <span id="message"></span>
         </div>
-
+        <?= $form->field($model, 'title')->hiddenInput()->label(false) ?>
+        <?= $form->field($model, 'details')->hiddenInput()->label(false) ?>
         <div class="col-xs-6 col-sm-6 col-lg-6">
             <?=
             $form->field($model, 'start_date')->widget(DatePicker::classname(), [
@@ -181,6 +182,8 @@ if (isset($_REQUEST['event_id'])) {
 </div>
 <script>
     $(document).ready(function () {
+        $("#classscheduletemporary-title").val($("#classschedule-subject_id option:selected").text());
+        $("#classscheduletemporary-details").val("Prof. " + $("#classschedule-professor_id option:selected").text());
         $("#save").on("click", function () {
             $.ajax({
                 type: 'POST',

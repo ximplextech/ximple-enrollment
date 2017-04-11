@@ -199,7 +199,7 @@ EOF;
 <script>
     $(document).ready(function () {
         $("#w1").css({"visibility": "hidden"});
-        $('.form-control').blur(function () {
+        $('.form-control').on("change", function () {
             var empty_flds = 0;
             $('.form-control').each(function () {
                 if ($(this).parent().hasClass("required") && $(this).val() == "") {
