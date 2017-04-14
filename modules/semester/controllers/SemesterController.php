@@ -8,6 +8,7 @@ use app\modules\semester\models\SemesterSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use pheme\grid\actions\ToggleAction;
 
 /**
  * SemesterController implements the CRUD actions for Semester model.
@@ -25,7 +26,21 @@ class SemesterController extends Controller
             ],
         ];
     }
-
+    
+    public function actions() 
+    {
+        //die("ok");
+	    return [
+		'toggle' => [
+		    'class' => ToggleAction::className(),
+		    'modelClass' => 'app\modules\semester\models\Semester',
+		    'attribute' => 'is_status',
+		    // Uncomment to enable flash messages
+		    'setFlash' => true,
+		],
+	    ];
+    }
+    
     /**
      * Lists all Semester models.
      * @return mixed

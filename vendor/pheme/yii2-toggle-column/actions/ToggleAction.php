@@ -107,6 +107,9 @@ class ToggleAction extends Action
         
         if($modelClass == 'app\modules\schoolyear\models\Schoolyear')
         	$model = $modelClass::find()->where(['school_year_id' => $id]);
+        
+        if($modelClass == 'app\modules\semester\models\Semester')
+        	$model = $modelClass::find()->where(['semester_id' => $id]);
 
         if (!empty($this->andWhere)) {
             $model->andWhere($this->andWhere);

@@ -58,7 +58,7 @@ class Schoolyear extends \yii\db\ActiveRecord
             'created_by' => Yii::t('app', 'Created By'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'updated_by' => Yii::t('app', 'Updated By'),
-            'is_status' => Yii::t('app', 'Inactive'), 
+            'is_status' => Yii::t('app', 'Active'), 
         ];
     }
 

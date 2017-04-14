@@ -71,6 +71,9 @@ class ToggleColumn extends DataColumn
         
         if(get_class($model) == 'app\modules\schoolyear\models\Schoolyear')
 		$url = [$this->action, 'id' => $model->school_year_id];
+        
+        if(get_class($model) == 'app\modules\semester\models\Semester')
+		$url = [$this->action, 'id' => $model->semester_id];
 
         $attribute = $this->attribute;
         $value = $model->$attribute;

@@ -18,7 +18,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Create Semester'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
+    <?php $visible = Yii::$app->user->can("/semester/*") ? true : false; ?>
+	<?php
+	\yii\widgets\Pjax::begin(
+	    [
+		'id' => 'semester-id',
+		'enablePushState'=>false,
+		'enableReplaceState' =>false,
+	    ]
+	); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -29,13 +37,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'semester_name',
             'start_date',
             'end_date',
+            [
+                'class' => '\pheme\grid\ToggleColumn',
+                'contentOptions' => ['class' => 'text-center'],
+                'attribute' => 'is_status',
+                'enableAjax' => true,
+                'filter' => ['0' => 'Active', '1' => 'Inactive']
+            ],
             //'created_at',
             // 'created_by',
             // 'updated_at',
             // 'updated_by',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            //['class' => 'yii\grid\ActionColumn'],
+            [
+			'class' => 'app\components\CustomActionColumn',
+			'visible' => $visible,
+		    ],
         ],
     ]); ?>
-
+    <?php \yii\widgets\Pjax::end(); ?>
 </div>

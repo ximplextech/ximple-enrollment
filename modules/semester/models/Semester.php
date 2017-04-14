@@ -15,6 +15,7 @@ use Yii;
  * @property integer $created_by
  * @property string $updated_at
  * @property integer $updated_by
+ * @property integer $is_status
  *
  * @property ClassSchedule[] $classSchedules
  * @property Users $createdBy
@@ -38,7 +39,7 @@ class Semester extends \yii\db\ActiveRecord
         return [
             [['semester_name', 'start_date', 'end_date', 'created_by', 'updated_by'], 'required'],
             [['start_date', 'end_date', 'created_at', 'updated_at'], 'safe'],
-            [['created_by', 'updated_by'], 'integer'],
+            [['created_by', 'updated_by', 'is_status'], 'integer'],
             [['semester_name'], 'string', 'max' => 45]
         ];
     }
@@ -57,6 +58,7 @@ class Semester extends \yii\db\ActiveRecord
             'created_by' => Yii::t('app', 'Created By'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'updated_by' => Yii::t('app', 'Updated By'),
+            'is_status' => Yii::t('app', 'Active'),
         ];
     }
 

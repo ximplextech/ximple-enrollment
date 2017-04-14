@@ -18,7 +18,7 @@ class SemesterSearch extends Semester
     public function rules()
     {
         return [
-            [['semester_id', 'created_by', 'updated_by'], 'integer'],
+            [['semester_id', 'created_by', 'updated_by', 'is_status'], 'integer'],
             [['semester_name', 'start_date', 'end_date', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -63,6 +63,7 @@ class SemesterSearch extends Semester
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,
             'updated_by' => $this->updated_by,
+            'is_status' => $this->is_status,
         ]);
 
         $query->andFilterWhere(['like', 'semester_name', $this->semester_name]);
