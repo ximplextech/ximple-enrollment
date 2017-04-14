@@ -104,6 +104,9 @@ class ToggleAction extends Action
 
 	if($modelClass == 'app\modules\course\models\Section')
         	$model = $modelClass::find()->where(['section_id' => $id]);
+        
+        if($modelClass == 'app\modules\schoolyear\models\Schoolyear')
+        	$model = $modelClass::find()->where(['school_year_id' => $id]);
 
         if (!empty($this->andWhere)) {
             $model->andWhere($this->andWhere);
@@ -128,10 +131,12 @@ class ToggleAction extends Action
 	}
 	
         if ($model->save()) {
+            die("OK");
             if ($this->setFlash) {
                 Yii::$app->session->setFlash('success', $this->flashSuccess);
             }
         } else {
+            die("NOT OK");
             if ($this->setFlash) {
                 Yii::$app->session->setFlash('error', $this->flashError);
             }

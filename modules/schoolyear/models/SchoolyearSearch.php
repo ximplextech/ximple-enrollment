@@ -18,7 +18,7 @@ class SchoolyearSearch extends Schoolyear
     public function rules()
     {
         return [
-            [['school_year_id', 'created_by', 'updated_by'], 'integer'],
+            [['school_year_id', 'created_by', 'updated_by', 'is_status'], 'integer'],
             [['start', 'end', 'school_year_alias', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -63,6 +63,7 @@ class SchoolyearSearch extends Schoolyear
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,
             'updated_by' => $this->updated_by,
+            'is_status' => $this->is_status,
         ]);
 
         $query->andFilterWhere(['like', 'school_year_alias', $this->school_year_alias]);

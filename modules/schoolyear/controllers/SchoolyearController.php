@@ -8,6 +8,7 @@ use app\modules\schoolyear\models\SchoolyearSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use pheme\grid\actions\ToggleAction;
 
 /**
  * SchoolyearController implements the CRUD actions for Schoolyear model.
@@ -24,6 +25,20 @@ class SchoolyearController extends Controller
                 ],
             ],
         ];
+    }
+    
+    public function actions() 
+    {
+        //die("ok");
+	    return [
+		'toggle' => [
+		    'class' => ToggleAction::className(),
+		    'modelClass' => 'app\modules\schoolyear\models\Schoolyear',
+		    'attribute' => 'is_status',
+		    // Uncomment to enable flash messages
+		    'setFlash' => true,
+		],
+	    ];
     }
 
     /**

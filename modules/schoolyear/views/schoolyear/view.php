@@ -50,6 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		'attribute'=>'updated_by',
 		'value'=>(!empty($model->updatedBy->user_login_id) ? $model->updatedBy->user_login_id : "Not Set")
 	    ],
+            'active',
         ],
     ]) ?>
 

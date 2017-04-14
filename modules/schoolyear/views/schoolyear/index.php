@@ -18,24 +18,46 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Create School Year'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?= GridView::widget([
+    <?php $visible = Yii::$app->user->can("/schoolyear/*") ? true : false; ?>
+    <?php
+    \yii\widgets\Pjax::begin(
+            [
+                'id' => 'school-year-id',
+                'enablePushState' => false,
+                'enableReplaceState' => false,
+            ]
+    );
+    ?>
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
+                ['class' => 'yii\grid\SerialColumn'],
             'school_year_id',
             'start',
             'end',
             'school_year_alias',
+            //'active',
+            [
+                'class' => '\pheme\grid\ToggleColumn',
+                'contentOptions' => ['class' => 'text-center'],
+                'attribute' => 'is_status',
+                'enableAjax' => true,
+                'filter' => ['0' => 'Active', '1' => 'Inactive']
+            ],
             //'created_at',
             // 'created_by',
             // 'updated_at',
             // 'updated_by',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            //['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'app\components\CustomActionColumn',
+                'visible' => $visible,
+            ],
         ],
-    ]); ?>
-
+    ]);
+    
+    ?>
+    <?php \yii\widgets\Pjax::end(); ?>
 </div>

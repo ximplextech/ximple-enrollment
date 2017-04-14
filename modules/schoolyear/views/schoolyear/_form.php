@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\switchinput\SwitchInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\schoolyear\models\Schoolyear */
@@ -17,6 +18,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'end')->textInput(['maxlength' => 4]) ?>
 
     <?= $form->field($model, 'school_year_alias')->textInput(['maxlength' => 45]) ?>
+    
+    
 
     <?php
     /**
