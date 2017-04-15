@@ -206,6 +206,7 @@ EOF;
 ?>
 <script>
     $(document).ready(function () {
+
         /**
          * Hide the calendar on load to disable adding schedule without filling up 
          * the required fields.
@@ -214,8 +215,9 @@ EOF;
         /**
          * Check if all the required fields are filled and show the calendar
          */
+        var empty_flds = 0;
         $('.form-control').on("change", function () {
-            var empty_flds = 0;
+            empty_flds = 0;
             $('.form-control').each(function () {
                 if ($(this).parent().hasClass("required") && $(this).val() == "") {
                     empty_flds++;
@@ -230,56 +232,102 @@ EOF;
         /**
          * If Prof is selected, load all the prof schedule
          */
-        $("#classschedule-professor_id").on("change", function () {
-            
-            $.ajax({
-                type: 'POST',
-                url: '<?= Url::to(["schedule/load-event"]) ?>',
-                data: {
-                    professor_id: $("#classschedule-professor_id option:selected").val(),
-                    school_year_id: $("#classschedule-school_year_id option:selected").val(),
-                    semester_id: $("#classschedule-semester_id option:selected").val(),
-                    room_id: $("#classschedule-room_id option:selected").val()
-                },
-                success: function (data) {
-                    //console.log("okok2");
-                    if (data == 1) {
-                        $("#w1").fullCalendar('removeEvents');
-                        $("#w1").fullCalendar('rerenderEvents');
-                        $("#w1").fullCalendar('refetchEvents');
+        var previous = "";
+        $("#classschedule-professor_id").on("click", function () {
+            previous = this.value;
+        }).change(function () {
+
+            if (empty_flds == 0 && previous != "") {
+
+                var message = "<?php echo Yii::t('app', 'Unsaved changes might be lost. Do you still want to continue?'); ?>"
+                bootbox.confirm(message, function (confirmed) {
+                    if (confirmed) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '<?= Url::to(["schedule/load-event"]) ?>',
+                            data: {
+                                professor_id: $("#classschedule-professor_id option:selected").val(),
+                                school_year_id: $("#classschedule-school_year_id option:selected").val(),
+                                semester_id: $("#classschedule-semester_id option:selected").val(),
+                                room_id: $("#classschedule-room_id option:selected").val()
+                            },
+                            success: function (data) {
+                                //console.log("okok2");
+                                if (data == 1) {
+                                    $("#w1").fullCalendar('removeEvents');
+                                    $("#w1").fullCalendar('rerenderEvents');
+                                    $("#w1").fullCalendar('refetchEvents');
+                                } else {
+                                    $("#w1").fullCalendar('removeEvents');
+                                    $("#w1").fullCalendar('rerenderEvents');
+                                    $("#w1").fullCalendar('refetchEvents');
+                                }
+                            }
+                        });
                     } else {
-                        $("#w1").fullCalendar('removeEvents');
-                        $("#w1").fullCalendar('rerenderEvents');
-                        $("#w1").fullCalendar('refetchEvents');
+                        $("#classschedule-professor_id").val(previous);
                     }
-                }
-            });
+                });
+            }
+
+
         });
-        
+        /**
+         * 
+         */
+        $("#classschedule-room_id").data('pre', $(this).val());
+
         $("#classschedule-room_id").on("change", function () {
-            
-            $.ajax({
-                type: 'POST',
-                url: '<?= Url::to(["schedule/load-event"]) ?>',
-                data: {
-                    professor_id: $("#classschedule-professor_id option:selected").val(),
-                    school_year_id: $("#classschedule-school_year_id option:selected").val(),
-                    semester_id: $("#classschedule-semester_id option:selected").val(),
-                    room_id: $("#classschedule-room_id option:selected").val()
-                },
-                success: function (data) {
-                    
-                    if (data == 1) {
-                        $("#w1").fullCalendar('removeEvents');
-                        $("#w1").fullCalendar('rerenderEvents');
-                        $("#w1").fullCalendar('refetchEvents');
+
+            var previous_room = $(this).data('pre');//get the pre data
+            //console.log(previous_room);
+            console.log("before 1st if => " + $(this).data('pre'));
+            if (empty_flds == 0 && previous_room != "") {
+
+                var message = "<?php echo Yii::t('app', 'Unsaved changes might be lost. Do you still want to continue?'); ?>"
+                bootbox.confirm(message, function (confirmed) {
+                    if (confirmed) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '<?= Url::to(["schedule/load-event"]) ?>',
+                            data: {
+                                professor_id: $("#classschedule-professor_id option:selected").val(),
+                                school_year_id: $("#classschedule-school_year_id option:selected").val(),
+                                semester_id: $("#classschedule-semester_id option:selected").val(),
+                                room_id: $("#classschedule-room_id option:selected").val()
+                            },
+                            success: function (data) {
+
+                                if (data == 1) {
+                                    $("#w1").fullCalendar('removeEvents');
+                                    $("#w1").fullCalendar('rerenderEvents');
+                                    $("#w1").fullCalendar('refetchEvents');
+                                } else {
+                                    $("#w1").fullCalendar('removeEvents');
+                                    $("#w1").fullCalendar('rerenderEvents');
+                                    $("#w1").fullCalendar('refetchEvents');
+                                }
+                            }
+                        });
+                        $(this).data('pre', $(this).val());//update the pre data
+                        console.log("confirmed => " + $(this).data('pre'));
+                        return;
                     } else {
-                        $("#w1").fullCalendar('removeEvents');
-                        $("#w1").fullCalendar('rerenderEvents');
-                        $("#w1").fullCalendar('refetchEvents');
+                        $("#classschedule-room_id").val(previous_room);
+                        //console.log($(this).val() + " +> " + previous_room);
+                        $(this).data('pre', previous_room);//update the pre data
+                        console.log(previous_room + " canceled => " + $(this).data('pre'));
+                        return;
                     }
-                }
-            });
+                });
+            } else {
+                $(this).data('pre', $(this).val());//update the pre data
+                console.log("end => " + $(this).data('pre'));
+            }
+
+
+
+
         });
     });
 
