@@ -112,13 +112,23 @@ class ScheduleController extends Controller {
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
-        $prof_id = Yii::$app->request->post()['prof_id'];
-        $addWhere .= "where professor_id = '{$prof_id}'";
+        //$prof_id = Yii::$app->request->post()['prof_id'];
         
+        $addWhere .= " where school_year_id = '".Yii::$app->request->post()['school_year_id']."'";
+        $addWhere .= " and semester_id = '".Yii::$app->request->post()['semester_id']."'";
         
-        //$modelTemp = \app\modules\classschedule\models\ClassSchedule::findAll($addWhere);
-        //$modelTemp = \app\modules\classschedule\models\ClassScheduleTemporary::findAll(['created_by' => Yii::$app->user->identity->id]);
-
+        if(isset(Yii::$app->request->post()['room_id'])){
+            $addWhereOr[] = " room_id = '".Yii::$app->request->post()['room_id']."'";
+        }
+        
+        if(isset(Yii::$app->request->post()['professor_id'])){
+           $addWhereOr[] .= " professor_id = '".Yii::$app->request->post()['professor_id']."'";
+        }
+        
+        if(count($addWhereOr) > 0){
+            $addWhere .= " and ". implode(" or ", $addWhereOr);
+        }
+        
         $model->load(Yii::$app->request->post());
 
         $sql = "INSERT INTO {$model->tableName()} (subject_id, school_year_id, semester_id, professor_id, "
@@ -135,7 +145,6 @@ class ScheduleController extends Controller {
         }else{
             echo "0";
         }
-        //return $events;
     }
 
     public function actionViewEvents($start = NULL, $end = NULL, $_ = NULL) {
@@ -149,15 +158,16 @@ class ScheduleController extends Controller {
         foreach ($eventList as $event) {
             $Event = new \yii2fullcalendar\models\Event();
             $Event->id = $event->class_schedule_id;
-            $Event->title = $event->subject->subject_name;
-            $Event->description = $event->professor->empName;
-            $Event->start = $event->start_date . " " . $event->start_time;
-            $Event->end = $event->end_date . " " . $event->end_time;
+            $Event->title = $event->subject->subject_name . " - " . $event->room->room_name .
+                              " \n ". Yii::t('app', 'Prof.') . " ". $event->professor->empName;
+            $Event->description = $event->subject->subject_name . " - " . $event->room->room_name;
+            $Event->start = $event->start_time;
+            $Event->end = $event->end_time;
             $Event->color = '#00A65A'; //(($event->event_type == 1) ? '#00A65A' : (($event->event_type == 2) ? '#00C0EF' : (($event->event_type == 3) ? '#F39C12' : '#074979')));
             $Event->textColor = '#FFF';
             $Event->borderColor = '#000';
-            $Event->event_type = "Holiday";
-            //$Event->event_type = (($event->event_type == 1) ? 'Holiday' : (($event->event_type == 2) ? 'Important Notice' : (($event->event_type == 3) ? 'Meeting' : 'Messages')));
+            $Event->event_type = "Class";
+            //$Event->event_type = (($event->event_type == 1) ? 'Class' : (($event->event_type == 2) ? 'Important Notice' : (($event->event_type == 3) ? 'Meeting' : 'Messages')));
             $Event->allDay = false; //($event->event_all_day == 1) ? true : false;
             if ($event->sun) {
                 $Event->dow[] = 0;

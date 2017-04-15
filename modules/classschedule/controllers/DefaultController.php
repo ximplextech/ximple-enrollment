@@ -128,15 +128,17 @@ class DefaultController extends Controller {
 	    foreach ($eventList as $event) {
 	      $Event = new \yii2fullcalendar\models\Event();
 	      $Event->id = $event->class_schedule_id;
-	      $Event->title = $event->subject->subject_name;
-	      $Event->description = $event->professor->empName;
-	      $Event->start = $event->start_date . " ". $event->start_time;
-	      $Event->end = $event->end_date . " ". $event->end_time;
+              $Event->title = $event->subject->subject_name . " - " . $event->room->room_name .
+                              " \n ". Yii::t('app', 'Prof.') . " ". $event->professor->empName;
+              $Event->description = $event->subject->subject_name . " - " . $event->room->room_name .
+                              " \n ". Yii::t('app', 'Prof.') . " ". $event->professor->empName;
+	      $Event->start = $event->start_time;
+	      $Event->end = $event->end_time;
 	      $Event->color = '#00A65A'; //(($event->event_type == 1) ? '#00A65A' : (($event->event_type == 2) ? '#00C0EF' : (($event->event_type == 3) ? '#F39C12' : '#074979')));
 	      $Event->textColor = '#FFF';
 	      $Event->borderColor = '#000';
-              $Event->event_type = "Holiday";
-	      //$Event->event_type = (($event->event_type == 1) ? 'Holiday' : (($event->event_type == 2) ? 'Important Notice' : (($event->event_type == 3) ? 'Meeting' : 'Messages')));
+              $Event->event_type = "Class";
+	      //$Event->event_type = (($event->event_type == 1) ? 'Class' : (($event->event_type == 2) ? 'Important Notice' : (($event->event_type == 3) ? 'Meeting' : 'Messages')));
 	      $Event->allDay = false; //($event->event_all_day == 1) ? true : false;
               if($event->sun){
                   $Event->dow[] = 0;

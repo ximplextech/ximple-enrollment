@@ -47,13 +47,13 @@ if (isset($_REQUEST['event_id'])) {
         ]);
         ?>
         <?= $form->errorSummary($model); ?>
-        <div class="alert alert-success alert-dismissable" style="display: none">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <div class="alert alert-success" style="display: none">
+            <button type="button" class="close" data-hide="alert">&times;</button>
             <h4><i class="icon fa fa-check"></i>Saved!</h4>
             <span id="message"></span>
         </div>
-        <div class="alert alert-danger alert-dismissable" style="display: none">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <div class="alert alert-danger" style="display: none">
+            <button type="button" class="close" data-hide="alert">&times;</button>
             <h4><i class="icon fa fa-remove"></i>Error!</h4>
             <span id="error-message"></span>
         </div>
@@ -103,7 +103,7 @@ if (isset($_REQUEST['event_id'])) {
         </div>
         <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 65px">
             <?=
-            $form->field($model, 'mon',['enableAjaxValidation' => true, 'validateOnChange' => false])->widget(SwitchInput::classname(), [
+            $form->field($model, 'mon', ['enableAjaxValidation' => true, 'validateOnChange' => false])->widget(SwitchInput::classname(), [
                 'pluginOptions' => ['size' => 'mini'],
                 'labelOptions' => ['style' => 'font-size: 12px'],
             ]);
@@ -169,16 +169,16 @@ if (isset($_REQUEST['event_id'])) {
 <script>
     $(document).ready(function () {
         $("#save").on("click", function () {
-             //console.log("ajaxStop in");
+            //console.log("ajaxStop in");
             $("#classscheduletemporary-subject_id").val($("#classschedule-subject_id option:selected").val());
             $("#classscheduletemporary-school_year_id").val($("#classschedule-school_year_id option:selected").val());
             $("#classscheduletemporary-semester_id").val($("#classschedule-semester_id option:selected").val());
             $("#classscheduletemporary-room_id").val($("#classschedule-room_id option:selected").val());
             $("#classscheduletemporary-professor_id").val($("#classschedule-professor_id option:selected").val());
             $("#classscheduletemporary-section_id").val($("#classschedule-section_id option:selected").val());
-            
-            
-            
+
+
+
             //$("#classscheduletemporary-details").val("Prof. " + $("#classschedule-professor_id option:selected").text());
 
             $.ajax({
@@ -201,11 +201,13 @@ if (isset($_REQUEST['event_id'])) {
             });
         });
 
-
+        $("[data-hide]").on("click", function () {
+            $(this).closest("." + $(this).attr("data-hide")).hide();
+        });
     });
-    
+
     $(document).ajaxStop(function () {
         console.log("ajaxStop out");
-        
+
     });
 </script>

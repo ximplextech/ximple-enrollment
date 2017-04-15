@@ -231,12 +231,15 @@ EOF;
          * If Prof is selected, load all the prof schedule
          */
         $("#classschedule-professor_id").on("change", function () {
- console.log("okok1");
+            
             $.ajax({
                 type: 'POST',
                 url: '<?= Url::to(["schedule/load-event"]) ?>',
                 data: {
-                    prof_id: $("#classschedule-professor_id option:selected").val()
+                    professor_id: $("#classschedule-professor_id option:selected").val(),
+                    school_year_id: $("#classschedule-school_year_id option:selected").val(),
+                    semester_id: $("#classschedule-semester_id option:selected").val(),
+                    room_id: $("#classschedule-room_id option:selected").val()
                 },
                 success: function (data) {
                     //console.log("okok2");
@@ -244,7 +247,33 @@ EOF;
                         $("#w1").fullCalendar('removeEvents');
                         $("#w1").fullCalendar('rerenderEvents');
                         $("#w1").fullCalendar('refetchEvents');
-                    }else{
+                    } else {
+                        $("#w1").fullCalendar('removeEvents');
+                        $("#w1").fullCalendar('rerenderEvents');
+                        $("#w1").fullCalendar('refetchEvents');
+                    }
+                }
+            });
+        });
+        
+        $("#classschedule-room_id").on("change", function () {
+            
+            $.ajax({
+                type: 'POST',
+                url: '<?= Url::to(["schedule/load-event"]) ?>',
+                data: {
+                    professor_id: $("#classschedule-professor_id option:selected").val(),
+                    school_year_id: $("#classschedule-school_year_id option:selected").val(),
+                    semester_id: $("#classschedule-semester_id option:selected").val(),
+                    room_id: $("#classschedule-room_id option:selected").val()
+                },
+                success: function (data) {
+                    
+                    if (data == 1) {
+                        $("#w1").fullCalendar('removeEvents');
+                        $("#w1").fullCalendar('rerenderEvents');
+                        $("#w1").fullCalendar('refetchEvents');
+                    } else {
                         $("#w1").fullCalendar('removeEvents');
                         $("#w1").fullCalendar('rerenderEvents');
                         $("#w1").fullCalendar('refetchEvents');
