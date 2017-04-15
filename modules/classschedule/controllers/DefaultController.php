@@ -65,11 +65,11 @@ class DefaultController extends Controller {
             
             $sql = "INSERT INTO {$model->tableName()} (subject_id, school_year_id, semester_id, professor_id, "
             . "start_time, end_time, sun, mon, tue, wed, thu, fri, sat, created_by, "
-            . "updated_by, section_id, class_intake_limit, start_date, end_date)  "
+            . "updated_by, section_id, class_intake_limit, start_date, end_date, room_id)  "
             . "SELECT '{$model->subject_id}', '{$model->school_year_id}', '{$model->semester_id}', '{$model->professor_id}',"
             . "start_time, end_time, sun, mon, tue, wed, thu, fri, sat, '{$model->created_by}',"
             . "'{$model->updated_by}', '{$model->section_id}', '{$model->class_intake_limit}', start_date, "
-            . "end_date from ".\app\modules\classschedule\models\ClassScheduleTemporary::tableName().";";
+            . "end_date, '{$model->room_id}' from ".\app\modules\classschedule\models\ClassScheduleTemporary::tableName().";";
 
             if (Yii::$app->db->createCommand($sql)->execute()) {
                 \Yii::$app
@@ -115,6 +115,55 @@ class DefaultController extends Controller {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+    
+    public function actionViewEvents($start=NULL,$end=NULL,$_=NULL) {
+
+	    \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+	    $eventList = \app\modules\classschedule\models\ClassSchedule::find()->all();
+
+	    $events = [];
+
+	    foreach ($eventList as $event) {
+	      $Event = new \yii2fullcalendar\models\Event();
+	      $Event->id = $event->class_schedule_id;
+	      $Event->title = $event->subject->subject_name;
+	      $Event->description = $event->professor->empName;
+	      $Event->start = $event->start_date . " ". $event->start_time;
+	      $Event->end = $event->end_date . " ". $event->end_time;
+	      $Event->color = '#00A65A'; //(($event->event_type == 1) ? '#00A65A' : (($event->event_type == 2) ? '#00C0EF' : (($event->event_type == 3) ? '#F39C12' : '#074979')));
+	      $Event->textColor = '#FFF';
+	      $Event->borderColor = '#000';
+              $Event->event_type = "Holiday";
+	      //$Event->event_type = (($event->event_type == 1) ? 'Holiday' : (($event->event_type == 2) ? 'Important Notice' : (($event->event_type == 3) ? 'Meeting' : 'Messages')));
+	      $Event->allDay = false; //($event->event_all_day == 1) ? true : false;
+              if($event->sun){
+                  $Event->dow[] = 0;
+              }
+              if($event->mon){
+                  $Event->dow[] = 1;
+              }
+              if($event->tue){
+                  $Event->dow[] = 2;
+              }
+              if($event->wed){
+                  $Event->dow[] = 3;
+              }
+              if($event->thu){
+                  $Event->dow[] = 4;
+              }
+              if($event->fri){
+                  $Event->dow[] = 5;
+              }
+              if($event->sat){
+                  $Event->dow[] = 6;
+              }
+              
+	     // $Event->url = $event->event_url;
+	      $events[] = $Event;
+	    }
+	    return $events;
     }
 
     /**

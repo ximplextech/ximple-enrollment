@@ -40,33 +40,31 @@ if (isset($_REQUEST['event_id'])) {
         <?php
         $form = ActiveForm::begin([
                     'id' => 'schedule-form',
+                    'enableAjaxValidation' => true,
                     'fieldConfig' => [
                         'template' => "{label}{input}{error}",
                     ],
         ]);
         ?>
-
+        <?= $form->errorSummary($model); ?>
         <div class="alert alert-success alert-dismissable" style="display: none">
             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
             <h4><i class="icon fa fa-check"></i>Saved!</h4>
             <span id="message"></span>
         </div>
-        <?= $form->field($model, 'title')->hiddenInput()->label(false) ?>
-        <?= $form->field($model, 'details')->hiddenInput()->label(false) ?>
-        <div class="col-xs-6 col-sm-6 col-lg-6">
-            <?=
-            $form->field($model, 'start_date')->widget(DatePicker::classname(), [
-                //'type' => DateTimePicker::TYPE_INPUT,
-                'options' => ['placeholder' => '', 'readOnly' => true],
-                'pluginOptions' => [
-                    'autoclose' => true,
-                    'maxView' => 0,
-                    'startView' => 0,
-                    'format' => 'yyyy-mm-dd',
-                ],
-            ]);
-            ?>
+        <div class="alert alert-danger alert-dismissable" style="display: none">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <h4><i class="icon fa fa-remove"></i>Error!</h4>
+            <span id="error-message"></span>
         </div>
+        <?php //echo $form->field($model, 'title')->hiddenInput()->label(false) ?>
+        <?php //echo $form->field($model, 'details')->hiddenInput()->label(false) ?>
+        <?php echo $form->field($model, 'subject_id')->hiddenInput()->label(false) ?>
+        <?php echo $form->field($model, 'school_year_id')->hiddenInput()->label(false) ?>
+        <?php echo $form->field($model, 'semester_id')->hiddenInput()->label(false) ?>
+        <?php echo $form->field($model, 'professor_id')->hiddenInput()->label(false) ?>
+        <?php echo $form->field($model, 'room_id')->hiddenInput()->label(false) ?>
+        <?php echo $form->field($model, 'section_id')->hiddenInput()->label(false) ?>
         <div class="col-xs-6 col-sm-6 col-lg-6">
             <?=
             $form->field($model, 'start_time')->widget(TimePicker::classname(), [
@@ -77,19 +75,6 @@ if (isset($_REQUEST['event_id'])) {
                     'maxView' => 0,
                     'startView' => 0,
                     'format' => 'hh:ii:ss',
-                ],
-            ]);
-            ?>
-        </div>
-
-        <div class="col-xs-6 col-sm-6 col-lg-6">
-            <?=
-            $form->field($model, 'end_date')->widget(DatePicker::classname(), [
-                //'type' => DateTimePicker::TYPE_INPUT,
-                'options' => ['placeholder' => '', 'readOnly' => true],
-                'pluginOptions' => [
-                    'autoclose' => true,
-                    'format' => 'yyyy-mm-dd',
                 ],
             ]);
             ?>
@@ -108,6 +93,7 @@ if (isset($_REQUEST['event_id'])) {
             ]);
             ?>
         </div>
+
         <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 65px">
             <?=
             $form->field($model, 'sun')->widget(SwitchInput::classname(), [
@@ -117,7 +103,7 @@ if (isset($_REQUEST['event_id'])) {
         </div>
         <div class="col-xs-2 col-sm-2 col-lg-2" style="width: 65px">
             <?=
-            $form->field($model, 'mon')->widget(SwitchInput::classname(), [
+            $form->field($model, 'mon',['enableAjaxValidation' => true, 'validateOnChange' => false])->widget(SwitchInput::classname(), [
                 'pluginOptions' => ['size' => 'mini'],
                 'labelOptions' => ['style' => 'font-size: 12px'],
             ]);
@@ -169,11 +155,11 @@ if (isset($_REQUEST['event_id'])) {
             <div class="col-xs-6">
                 <?= Html::button($model->isNewRecord ? Yii::t('dash', 'Add Schedule') : Yii::t('dash', 'Update'), ['id' => 'save', 'class' => $model->isNewRecord ? 'btn btn-success btn-block' : 'btn btn-info btn-block']) ?> 
             </div>
-            <div class="col-xs-6">
-                <?php
-                echo Html::a(Yii::t('dash', 'Cancel'), ['index'], ['class' => 'btn btn-default btn-block', 'data-dismiss' => "modal"]);
-                ?>
-            </div>
+            <!--            <div class="col-xs-6">
+            <?php
+            echo Html::a(Yii::t('dash', 'Cancel'), ['index'], ['class' => 'btn btn-default btn-block', 'data-dismiss' => "modal"]);
+            ?>
+                        </div>-->
         </div>
 
         <?php ActiveForm::end(); ?>
@@ -182,21 +168,33 @@ if (isset($_REQUEST['event_id'])) {
 </div>
 <script>
     $(document).ready(function () {
-        $("#classscheduletemporary-title").val($("#classschedule-subject_id option:selected").text());
-        $("#classscheduletemporary-details").val("Prof. " + $("#classschedule-professor_id option:selected").text());
         $("#save").on("click", function () {
+             //console.log("ajaxStop in");
+            $("#classscheduletemporary-subject_id").val($("#classschedule-subject_id option:selected").val());
+            $("#classscheduletemporary-school_year_id").val($("#classschedule-school_year_id option:selected").val());
+            $("#classscheduletemporary-semester_id").val($("#classschedule-semester_id option:selected").val());
+            $("#classscheduletemporary-room_id").val($("#classschedule-room_id option:selected").val());
+            $("#classscheduletemporary-professor_id").val($("#classschedule-professor_id option:selected").val());
+            $("#classscheduletemporary-section_id").val($("#classschedule-section_id option:selected").val());
+            
+            
+            
+            //$("#classscheduletemporary-details").val("Prof. " + $("#classschedule-professor_id option:selected").text());
+
             $.ajax({
                 type: 'POST',
-                url: '<?= Url::to(["schedule/add-event"]) ?>',
+                url: '<?= Url::to(["schedule/save-events"]) ?>',
                 data: $('#schedule-form').serialize(),
                 success: function (data) {
                     if (data == 1) {
                         $("#message").html("<?= Yii::t('app', 'Class schedule successfully added. You can add another for this subject.'); ?>")
                         $(".alert-success").show();
+                        //$("#w1").fullCalendar('removeEvents');
                         $("#w1").fullCalendar('rerenderEvents');
                         $("#w1").fullCalendar('refetchEvents');
                     } else {
-                        $("#message").html("<?= Yii::t('app', 'Failed saving the class schedule.'); ?>")
+                        $("#error-message").html("<?= Yii::t('app', 'Failed saving the class schedule. There might be conflicts on the added schedule.'); ?>");
+                        $(".alert-danger").show();
 
                     }
                 }
@@ -204,5 +202,10 @@ if (isset($_REQUEST['event_id'])) {
         });
 
 
+    });
+    
+    $(document).ajaxStop(function () {
+        console.log("ajaxStop out");
+        
     });
 </script>

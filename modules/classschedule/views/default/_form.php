@@ -16,11 +16,11 @@ use yii\helpers\Url;
         <div class="col-md-6">
             <div class="row">
                 <div class="col-md-6">
-                    <?= $form->field($model, 'school_year_id')->dropDownList(ArrayHelper::map(app\modules\schoolyear\models\Schoolyear::find()->all(), 'school_year_id', 'school_year_alias'), ['prompt' => Yii::t('app', 'Select School Year')]); ?>
+                    <?= $form->field($model, 'school_year_id')->dropDownList(ArrayHelper::map(app\modules\schoolyear\models\Schoolyear::findAll(['is_status' => 0]), 'school_year_id', 'school_year_alias')); ?>
 
                 </div>
                 <div class="col-md-6">
-                    <?= $form->field($model, 'semester_id')->dropDownList(ArrayHelper::map(\app\modules\semester\models\Semester::find()->all(), 'semester_id', 'semester_name'), ['prompt' => Yii::t('app', 'Select Semester')]); ?>
+                    <?= $form->field($model, 'semester_id')->dropDownList(ArrayHelper::map(\app\modules\semester\models\Semester::findAll(['is_status' => 0]), 'semester_id', 'semester_name')); ?>
 
                 </div>
             </div>
@@ -40,10 +40,18 @@ use yii\helpers\Url;
 
                 </div>
                 <div class="col-md-6">
+                    <?= $form->field($model, 'room_id')->dropDownList(ArrayHelper::map(app\modules\room\models\Room::find()->all(), 'room_id', 'room_name'), ['prompt' => Yii::t('app', 'Select Room')]); ?>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6">
                     <?= $form->field($model, 'class_intake_limit')->textInput() ?>
 
                 </div>
             </div>
+
             <div class="row" id="eventModal" style="display: none">
 
 
@@ -198,7 +206,14 @@ EOF;
 ?>
 <script>
     $(document).ready(function () {
+        /**
+         * Hide the calendar on load to disable adding schedule without filling up 
+         * the required fields.
+         */
         $("#w1").css({"visibility": "hidden"});
+        /**
+         * Check if all the required fields are filled and show the calendar
+         */
         $('.form-control').on("change", function () {
             var empty_flds = 0;
             $('.form-control').each(function () {
@@ -208,9 +223,34 @@ EOF;
             });
             if (empty_flds == 0) {
                 $("#w1").css({"visibility": "visible"});
-            }else{
+            } else {
                 $("#w1").css({"visibility": "hidden"});
             }
+        });
+        /**
+         * If Prof is selected, load all the prof schedule
+         */
+        $("#classschedule-professor_id").on("change", function () {
+ console.log("okok1");
+            $.ajax({
+                type: 'POST',
+                url: '<?= Url::to(["schedule/load-event"]) ?>',
+                data: {
+                    prof_id: $("#classschedule-professor_id option:selected").val()
+                },
+                success: function (data) {
+                    //console.log("okok2");
+                    if (data == 1) {
+                        $("#w1").fullCalendar('removeEvents');
+                        $("#w1").fullCalendar('rerenderEvents');
+                        $("#w1").fullCalendar('refetchEvents');
+                    }else{
+                        $("#w1").fullCalendar('removeEvents');
+                        $("#w1").fullCalendar('rerenderEvents');
+                        $("#w1").fullCalendar('refetchEvents');
+                    }
+                }
+            });
         });
     });
 

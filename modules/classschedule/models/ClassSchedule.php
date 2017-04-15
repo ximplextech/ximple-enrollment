@@ -26,6 +26,7 @@ use Yii;
  * @property string $updated_at
  * @property integer $updated_by
  * @property integer $section_id
+ * @property integer $room_id
  * @property integer $class_intake_limit
  * @property string $start_date
  * @property string $end_date
@@ -56,8 +57,8 @@ class ClassSchedule extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['class_schedule_id', 'subject_id', 'school_year_id', 'semester_id', 'professor_id', 'start_time', 'end_time', 'created_by', 'updated_by', 'section_id'], 'required'],
-            [['class_schedule_id', 'subject_id', 'school_year_id', 'semester_id', 'professor_id', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'created_by', 'updated_by', 'section_id', 'class_intake_limit'], 'integer'],
+            [['class_schedule_id', 'subject_id', 'school_year_id', 'semester_id', 'professor_id', 'start_time', 'end_time', 'created_by', 'updated_by', 'section_id', 'room_id'], 'required'],
+            [['class_schedule_id', 'subject_id', 'school_year_id', 'semester_id', 'professor_id', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'created_by', 'updated_by', 'section_id', 'class_intake_limit', 'room_id'], 'integer'],
             [['start_time', 'end_time', 'created_at', 'updated_at', 'start_date', 'end_date'], 'safe']
         ];
     }
@@ -90,6 +91,7 @@ class ClassSchedule extends \yii\db\ActiveRecord
             'class_intake_limit' => Yii::t('app', 'Class Intake Limit'),
             'start_date' => Yii::t('app', 'Start Date'),
             'end_date' => Yii::t('app', 'End Date'),
+            'room_id' => Yii::t('app', 'Room'),
         ];
     }
 
@@ -98,7 +100,7 @@ class ClassSchedule extends \yii\db\ActiveRecord
      */
     public function getSubject()
     {
-        return $this->hasOne(Subjects::className(), ['subject_id' => 'subject_id']);
+        return $this->hasOne(\app\modules\subjects\models\Subjects::className(), ['subject_id' => 'subject_id']);
     }
 
     /**
@@ -122,7 +124,7 @@ class ClassSchedule extends \yii\db\ActiveRecord
      */
     public function getProfessor()
     {
-        return $this->hasOne(EmpInfo::className(), ['emp_info_id' => 'professor_id']);
+        return $this->hasOne(\app\modules\employee\models\EmpInfo::className(), ['emp_info_id' => 'professor_id']);
     }
 
     /**
@@ -163,5 +165,13 @@ class ClassSchedule extends \yii\db\ActiveRecord
     public function getStuSchedules()
     {
         return $this->hasMany(StuSchedule::className(), ['class_schedule_id' => 'class_schedule_id']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRoom()
+    {
+        return $this->hasOne(\app\modules\room\models\Room::className(), ['room_id' => 'room_id']);
     }
 }
