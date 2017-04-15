@@ -145,6 +145,7 @@ class EventsController extends Controller
 	      $Event->borderColor = '#000';
 	      $Event->event_type = (($event->event_type == 1) ? 'Holiday' : (($event->event_type == 2) ? 'Important Notice' : (($event->event_type == 3) ? 'Meeting' : 'Messages')));
 	      $Event->allDay = ($event->event_all_day == 1) ? true : false;
+              $Event->dow = false;
 	     // $Event->url = $event->event_url;
 	      $events[] = $Event;
 	    }

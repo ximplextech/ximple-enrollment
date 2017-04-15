@@ -151,7 +151,7 @@ class ScheduleController extends Controller {
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-        $eventList = \app\modules\classschedule\models\ClassScheduleTemporary::find()->all();
+        $eventList = \app\modules\classschedule\models\ClassScheduleTemporary::find()->where(['is_status'=> 0])->all();
 
         $events = [];
 
@@ -221,10 +221,10 @@ class ScheduleController extends Controller {
                     return $this->redirect(['index']);
             }
             else {
-                return $this->renderAjax('_form', ['model' => $model,]);
+                return $this->renderAjax('_update_form', ['model' => $model,]);
             }
         } else {
-            return $this->renderAjax('_form', [
+            return $this->renderAjax('_update_form', [
                         'model' => $model,
             ]);
         }
@@ -237,16 +237,14 @@ class ScheduleController extends Controller {
      * @return mixed
      */
     public function actionEventDelete($e_id) {
-        $model = Events::findOne($e_id);
+        $model = ClassSchedule::findOne($e_id);
         $model->is_status = 2;
         $model->updated_by = Yii::$app->getid->getId();
         $model->updated_at = new \yii\db\Expression('NOW()');
         $model->save();
 
-        if (isset($_GET['return_dashboard']))
-            return $this->redirect(['/dashboard']);
-        else
-            return $this->redirect(['index']);
+       
+        return $this->redirect(['/classschedule']);
     }
 
     /**
@@ -257,7 +255,7 @@ class ScheduleController extends Controller {
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id) {
-        if (($model = Events::findOne($id)) !== null) {
+        if (($model = ClassSchedule::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -30,6 +30,7 @@ use Yii;
  * @property integer $class_intake_limit
  * @property string $start_date
  * @property string $end_date
+ * @property integer $is_status
  *
  * @property Subjects $subject
  * @property SchoolYear $schoolYear
@@ -58,7 +59,7 @@ class ClassSchedule extends \yii\db\ActiveRecord
     {
         return [
             [['class_schedule_id', 'subject_id', 'school_year_id', 'semester_id', 'professor_id', 'start_time', 'end_time', 'created_by', 'updated_by', 'section_id', 'room_id'], 'required'],
-            [['class_schedule_id', 'subject_id', 'school_year_id', 'semester_id', 'professor_id', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'created_by', 'updated_by', 'section_id', 'class_intake_limit', 'room_id'], 'integer'],
+            [['class_schedule_id', 'subject_id', 'school_year_id', 'semester_id', 'professor_id', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'created_by', 'updated_by', 'section_id', 'class_intake_limit', 'room_id', 'is_status'], 'integer'],
             [['start_time', 'end_time', 'created_at', 'updated_at', 'start_date', 'end_date'], 'safe']
         ];
     }
@@ -92,6 +93,7 @@ class ClassSchedule extends \yii\db\ActiveRecord
             'start_date' => Yii::t('app', 'Start Date'),
             'end_date' => Yii::t('app', 'End Date'),
             'room_id' => Yii::t('app', 'Room'),
+            'is_status' => Yii::t('app', 'Inactive'),
         ];
     }
 

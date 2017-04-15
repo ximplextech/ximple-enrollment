@@ -45,26 +45,30 @@ $this->params['breadcrumbs'][] = $this->title;
 	   	});
 			}
 EOF;
-                $updateEvent = Yii::t('dash', 'Update Event');
+                $updateEvent = Yii::t('dash', 'Update Schedule');
                 $JSEventClick = <<<EOF
 	function(calEvent, jsEvent, view) {
+                       
 	    var eventId = calEvent.id;
+                        console.log(eventId);
 		$.ajax({
 		   url: "{$UEurl}",
 		   data: { event_id : eventId, return_dashboard : 1 },
 		   type: "GET",
 		   success: function(data) {
-			   //$(".modal-body").addClass("row");
-			   //$(".modal-header").html('<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button><h3> {$updateEvent} </h3>');
-			   $('#eventModal').html('<div class="col-md-12">' + data + '</div>');
-			   $('#eventModal').show();
+			   $(".modal-body").addClass("row");
+			   $(".modal-header").html('<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button><h3> {$updateEvent} </h3>');
+			   //$('#eventModal').html(data);
+                           $('.modal-body').html(data);
+			   $('#eventModal').modal();
+                           console.log('okok');
 		   }
 	   	});
 		$(this).css('border-color', 'red');
 	}
 EOF;
-                $eDetail = Yii::t('app', 'Event Detail');
-                $eType = Yii::t('app', 'Event Type');
+                $eDetail = Yii::t('app', 'Schedule Detail');
+                $eType = Yii::t('app', 'Schedule Type');
                 $eStart = Yii::t('app', 'Start Time');
                 $eEnd = Yii::t('app', 'End Time');
                 $JsF = <<<EOF
@@ -98,7 +102,7 @@ EOF;
                                 'editable' => true,
                                 'selectable' => true,
                                 'eventLimit' => true,
-                                'eventLimitText' => 'more Events',
+                                'eventLimitText' => 'more Schedules',
                                 'selectHelper' => true,
                                 'header' => [
                                     'left' => '',
@@ -135,3 +139,13 @@ EOF;
         </div>
 
 </div>
+<?php
+	yii\bootstrap\Modal::begin([
+		'id' => 'eventModal',
+		//'header' => "<div class='row'><div class='col-xs-6'><h3>Add Schedule</h3></div><div class='col-xs-6'>".Html::a('Delete', ['#'], ['class' => 'btn btn-danger pull-right', 'style' => 'margin-top:5px'])."</div></div>",
+		'header' => "<h3>".Yii::t('dash', 'Add Schedule')."</h3>",
+	]);
+
+	yii\bootstrap\Modal::end();
+?>
+  

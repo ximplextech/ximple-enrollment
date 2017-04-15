@@ -121,7 +121,7 @@ class DefaultController extends Controller {
 
 	    \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-	    $eventList = \app\modules\classschedule\models\ClassSchedule::find()->all();
+	    $eventList = \app\modules\classschedule\models\ClassSchedule::find()->where(['is_status'=> 0])->all();
 
 	    $events = [];
 
