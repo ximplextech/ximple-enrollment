@@ -29,9 +29,9 @@ if (isset($_REQUEST['event_id'])) {
         echo Html::a('<i class="fa fa-trash-o"></i> ' . Yii::t('dash', 'Remove'), ['schedule/event-delete', 'e_id' => $_REQUEST['event_id']], ['class' => 'btn btn-danger btn-block', 'title' => Yii::t('dash', 'Remove/Delete Schedule'), 'data' => ['confirm' => Yii::t('dash', 'Are you sure you want to delete this item?'), 'method' => 'post'],]);
     }
     echo '</div>';
-
-    $model->start_date = Yii::$app->formatter->asDateTime($model->start_date);
-    $model->end_date = Yii::$app->formatter->asDateTime($model->end_date);
+    //die($model->start_time);
+    $model->start_time = date("h:i:s a", strtotime($model->start_time)); //Yii::$app->dateformatter->getTFormat($model->start_time);
+    $model->end_time = date("h:i:s a", strtotime($model->end_time)); //Yii::$app->dateformatter->getTFormat($model->end_time);
 }
 ?>
 <div class="col-xs-12 col-lg-12">
@@ -153,8 +153,8 @@ if (isset($_REQUEST['event_id'])) {
 
         <div class="form-group col-xs-12 col-sm-12 col-lg-12 no-padding edusecArLangCss">
             <div class="col-xs-6">
-                <?= Html::button($model->isNewRecord ? Yii::t('dash', 'Add Schedule') : Yii::t('dash', 'Update'), ['id' => 'save', 'class' => $model->isNewRecord ? 'btn btn-success btn-block' : 'btn btn-info btn-block']) ?> 
-            </div>
+                <?= Html::submitButton($model->isNewRecord ? Yii::t('dash', 'Create') : Yii::t('dash', 'Update'), ['class' => $model->isNewRecord  ? 'btn btn-success btn-block' : 'btn btn-info btn-block']) ?> 
+	</div>
             <!--            <div class="col-xs-6">
             <?php
             echo Html::a(Yii::t('dash', 'Cancel'), ['index'], ['class' => 'btn btn-default btn-block', 'data-dismiss' => "modal"]);
@@ -167,47 +167,47 @@ if (isset($_REQUEST['event_id'])) {
     </div>
 </div>
 <script>
-    $(document).ready(function () {
-        $("#save").on("click", function () {
-            //console.log("ajaxStop in");
-            $("#classscheduletemporary-subject_id").val($("#classschedule-subject_id option:selected").val());
-            $("#classscheduletemporary-school_year_id").val($("#classschedule-school_year_id option:selected").val());
-            $("#classscheduletemporary-semester_id").val($("#classschedule-semester_id option:selected").val());
-            $("#classscheduletemporary-room_id").val($("#classschedule-room_id option:selected").val());
-            $("#classscheduletemporary-professor_id").val($("#classschedule-professor_id option:selected").val());
-            $("#classscheduletemporary-section_id").val($("#classschedule-section_id option:selected").val());
-
-
-
-            //$("#classscheduletemporary-details").val("Prof. " + $("#classschedule-professor_id option:selected").text());
-
-            $.ajax({
-                type: 'POST',
-                url: '<?= Url::to(["schedule/save-events"]) ?>',
-                data: $('#schedule-form').serialize(),
-                success: function (data) {
-                    if (data == 1) {
-                        $("#message").html("<?= Yii::t('app', 'Class schedule successfully added. You can add another for this subject.'); ?>")
-                        $(".alert-success").show();
-                        //$("#w1").fullCalendar('removeSchedules');
-                        $("#w1").fullCalendar('rerenderSchedules');
-                        $("#w1").fullCalendar('refetchSchedules');
-                    } else {
-                        $("#error-message").html("<?= Yii::t('app', 'Failed saving the class schedule. There might be conflicts on the added schedule.'); ?>");
-                        $(".alert-danger").show();
-
-                    }
-                }
-            });
-        });
-
-        $("[data-hide]").on("click", function () {
-            $(this).closest("." + $(this).attr("data-hide")).hide();
-        });
-    });
-
-    $(document).ajaxStop(function () {
-        console.log("ajaxStop out");
-
-    });
+//    $(document).ready(function () {
+//        $("#save").on("click", function () {
+//            //console.log("ajaxStop in");
+//            $("#classscheduletemporary-subject_id").val($("#classschedule-subject_id option:selected").val());
+//            $("#classscheduletemporary-school_year_id").val($("#classschedule-school_year_id option:selected").val());
+//            $("#classscheduletemporary-semester_id").val($("#classschedule-semester_id option:selected").val());
+//            $("#classscheduletemporary-room_id").val($("#classschedule-room_id option:selected").val());
+//            $("#classscheduletemporary-professor_id").val($("#classschedule-professor_id option:selected").val());
+//            $("#classscheduletemporary-section_id").val($("#classschedule-section_id option:selected").val());
+//
+//
+//
+//            //$("#classscheduletemporary-details").val("Prof. " + $("#classschedule-professor_id option:selected").text());
+//
+//            $.ajax({
+//                type: 'POST',
+//                url: '<?= Url::to(["schedule/save-events"]) ?>',
+//                data: $('#schedule-form').serialize(),
+//                success: function (data) {
+//                    if (data == 1) {
+//                        $("#message").html("<?= Yii::t('app', 'Class schedule successfully added. You can add another for this subject.'); ?>")
+//                        $(".alert-success").show();
+//                        //$("#w1").fullCalendar('removeSchedules');
+//                        $("#w1").fullCalendar('rerenderSchedules');
+//                        $("#w1").fullCalendar('refetchSchedules');
+//                    } else {
+//                        $("#error-message").html("<?= Yii::t('app', 'Failed saving the class schedule. There might be conflicts on the added schedule.'); ?>");
+//                        $(".alert-danger").show();
+//
+//                    }
+//                }
+//            });
+//        });
+//
+//        $("[data-hide]").on("click", function () {
+//            $(this).closest("." + $(this).attr("data-hide")).hide();
+//        });
+//    });
+//
+//    $(document).ajaxStop(function () {
+//        console.log("ajaxStop out");
+//
+//    });
 </script>

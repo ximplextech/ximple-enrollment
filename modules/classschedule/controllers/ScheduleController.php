@@ -205,25 +205,35 @@ class ScheduleController extends Controller {
      */
     public function actionUpdateEvent($event_id) {
         $model = $this->findModel($event_id);
-
-        if ($model->load(Yii::$app->request->post()) || isset($_POST['Events'])) {
-
-            $model->attributes = $_POST['Events'];
-            $model->event_start_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['Events']['event_start_date']);
-            $model->event_end_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['Events']['event_end_date']);
+//        if(Yii::$app->request->post()){
+//             print_r(Yii::$app->request->post()); die();
+//        }
+        if ($model->load(Yii::$app->request->post()) || isset($_POST['ClassSchedule'])) {
+           
+            $model->attributes = $_POST['ClassSchedule'];
+            $model->start_date = new \yii\db\Expression('CURDATE()'); //Yii::$app->dateformatter->storeDateTimeFormat($_POST['ClassSchedule']['start_date']);
+            $model->end_date = new \yii\db\Expression('CURDATE()'); //Yii::$app->dateformatter->storeDateTimeFormat($_POST['ClassSchedule']['end_date']);
+            $model->start_time = Yii::$app->dateformatter->storeTimeFormat($_POST['ClassSchedule']['start_time']);
+            $model->end_time = Yii::$app->dateformatter->storeTimeFormat($_POST['ClassSchedule']['end_time']);
+            //$model->created_by = Yii::$app->getid->getId();
+            //$model->created_at = new \yii\db\Expression('NOW()');
             $model->updated_by = Yii::$app->getid->getId();
             $model->updated_at = new \yii\db\Expression('NOW()');
 
-            if ($model->save()) {
-                if (isset($_GET['return_dashboard']))
-                    return $this->redirect(['/dashboard']);
-                else
-                    return $this->redirect(['index']);
+            try {
+
+                if ($model->save(false)) {
+
+                    return $this->redirect(['/classschedule']);
+                }
+            } catch (CDbException $ex) {
+
+                if ($ex->getCode() === 23000) {
+                    return $this->redirect(['/classschedule']);
+                }
             }
-            else {
-                return $this->renderAjax('_update_form', ['model' => $model,]);
-            }
-        } else {
+        } 
+        else {
             return $this->renderAjax('_update_form', [
                         'model' => $model,
             ]);
