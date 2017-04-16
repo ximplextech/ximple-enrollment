@@ -232,11 +232,9 @@ EOF;
         /**
          * If Prof is selected, load all the prof schedule
          */
-        var previous = "";
-        $("#classschedule-professor_id").on("click", function () {
-            previous = this.value;
-        }).change(function () {
-
+        $("#classschedule-professor_id").data('pre', $(this).val());
+        $("#classschedule-professor_id").on("change", function () {
+            var previous = $(this).data('pre');//get the pre data
             if (empty_flds == 0 && previous != "") {
 
                 var message = "<?php echo Yii::t('app', 'Unsaved changes might be lost. Do you still want to continue?'); ?>"
