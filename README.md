@@ -14,10 +14,10 @@
   
 # FEATURES
 - Student Information System
--- Detailed student (current, formal, detained, alumni members) profile with photo and documents i.e. LC, mark sheets etc
--- Student login details
--- Extracting entire information to different formats e.g. excel, pdf
--- Highly customizable & search driven report for a student information
+  -- Detailed student (current, formal, detained, alumni members) profile with photo and documents i.e. LC, mark sheets etc
+  -- Student login details
+  -- Extracting entire information to different formats e.g. excel, pdf
+  -- Highly customizable & search driven report for a student information
 
 - Employee Information System 
 -- Entire employee (teaching / non – teaching) profile with photo and documents e. g. ID proof, driving license
