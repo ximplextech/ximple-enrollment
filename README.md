@@ -1,4 +1,4 @@
-# ximple-enrollment
+# Ximple Enrollment System
   This is a fork from this latest commit https://github.com/EduSec/EduSec/commit/a7a2e1baa380ed39114b010ddfddf041502b2bfb of https://github.com/EduSec/EduSec.
 
   This project was created to enhance the existing Edusec Enrollment System which opted to make their software cloud-based and was not movement for about a year.
