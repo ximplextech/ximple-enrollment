@@ -80,11 +80,11 @@ Generate reports pertaining to fees collections, late payments, special fees, ch
     ```php
     return [
      'class' => 'yii\db\Connection',
-     'dsn' => 'mysql:host=localhost;dbname=edusec',
+     'dsn' => 'mysql:host=localhost;dbname=ximple_enrollment',
      'username' => 'root',
      'password' => '',
      'charset' => 'utf8',
     ];`
 	```
-6. Next, you will be redirected to welcome/login page. If you upload sample-database wii be redirect login page other wise redirect welcome page and then setting up EduSec, creating an admin user account and institute setup etc.
+6. Next, you will be redirected to welcome/login page. If you upload sample-database wii be redirect login page other wise redirect welcome page and then setting up Ximple-Enrollment, creating an admin user account and institute setup etc.
 7. You are now ready to use Ximple-Enrollment.
