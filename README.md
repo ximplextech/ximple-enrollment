@@ -62,3 +62,29 @@ Generate reports pertaining to fees collections, late payments, special fees, ch
 
 - Online Payment (Not yet done)
 	* Can easily pay school fees online for a hassle-free transactions. 
+
+# SYSTEM REQUIREMENTS
+
+* A web server with PHP 5.4.0 or later
+* MySQL 5.1.0 or later
+
+# INSTALLATION
+
+
+1. Move/Upload Ximple-Enrollment to the web directory of your choice.
+2. Create a new single MySQL database for Ximple-Enrollment to store all its tables.
+3. Import Ximple-Enrollment database into `applicationPath/database`. If you wish you install sample data please upload `ximple-enrollment-sample-db.sql` other wise upload `ximple-enrollment-empty-db.sql`.
+4. Go to` applicationPath/config` and rename file `db-sample.php` to `db.php`
+5. Edit the file `applicationPath/config/db.php` with real data, for example:
+
+    ```php
+    return [
+     'class' => 'yii\db\Connection',
+     'dsn' => 'mysql:host=localhost;dbname=edusec',
+     'username' => 'root',
+     'password' => '',
+     'charset' => 'utf8',
+    ];`
+	```
+6. Next, you will be redirected to welcome/login page. If you upload sample-database wii be redirect login page other wise redirect welcome page and then setting up EduSec, creating an admin user account and institute setup etc.
+7. You are now ready to use Ximple-Enrollment.
